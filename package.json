@@ -1,30 +1,20 @@
 {
-  "name": "tomasverde",
+  "name": "tomas-verde",
   "version": "1.0.0",
-  "description": "Landing page para Tomás Verde - Reciclaje de residuos orgánicos en Pichilemu",
-  "main": "index.html",
+  "description": "Sitio web de Tomás Verde - Reciclaje orgánico en Pichilemu",
+  "main": "index.js",
   "scripts": {
-    "sass": "sass --watch css/styles.scss:css/styles.css",
-    "sass:build": "sass --no-source-map --style=compressed css/styles.scss:css/styles.css",
-    "serve": "npx serve",
-    "dev": "concurrently \"npm run sass\" \"npm run serve\"",
-    "build": "npm run sass:build"
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "sass": "sass --watch css:css"
   },
-  "keywords": [
-    "reciclaje",
-    "compostaje",
-    "landing-page",
-    "pichilemu"
-  ],
-  "author": "",
-  "license": "UNLICENSED",
-  "devDependencies": {
-    "concurrently": "^8.2.0",
-    "sass": "^1.64.1",
-    "serve": "^14.2.0"
-  },
+  "author": "Tomás Verde",
+  "license": "ISC",
   "dependencies": {
-    "gsap": "^3.11.4",
-    "glightbox": "^3.2.0"
+    "gsap": "^3.12.2"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5",
+    "sass": "^1.69.5"
   }
 } 

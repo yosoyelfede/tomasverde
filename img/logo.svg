@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Leaf shape -->
+  <path d="M40,10 C20,15 15,25 10,35 L15,37 L17,32 C18,32 40,30 45,10 C44,13 30,15 20,17 S5,25 5,30 C5,32 7,35 8,36 L9,38 L10,35 C10,36 15,20 40,10 Z" 
+        fill="#2C5530"/>
+  
+  <!-- Text "Tomás Verde" -->
+  <text x="60" y="35" 
+        font-family="Caveat, cursive" 
+        font-size="28" 
+        font-weight="700" 
+        fill="#2C5530">
+    Tomás Verde
+  </text>
+  
+  <!-- Decorative underline -->
+  <path d="M60,40 C80,38 100,42 120,40" 
+        stroke="#2C5530" 
+        stroke-width="2" 
+        fill="none" 
+        stroke-linecap="round"/>
+</svg> 

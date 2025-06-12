@@ -3,401 +3,217 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Tomás Verde - Reciclaje de residuos orgánicos a domicilio en Pichilemu. Servicio cercano, comprometido y sustentable.">
-  <title>Tomás Verde | Reciclaje Orgánico en Pichilemu</title>
+  <meta name="description" content="Servicio de reciclaje y compostaje orgánico en Pichilemu. Transformamos residuos orgánicos en compost de calidad para un futuro más sostenible.">
+  <title>Tomás Verde - Reciclaje Orgánico en Pichilemu</title>
   
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Libre+Baskerville:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Caveat:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Styles -->
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="./css/styles.css">
   
-  <!-- GLightbox -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
-  
-  <!-- Favicon -->
-  <link rel="icon" href="assets/svgs/favicon.svg" type="image/svg+xml">
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
 </head>
 <body>
   <!-- Preloader -->
   <div class="preloader">
-    <div class="preloader__spinner"></div>
+    <div class="preloader__content">
+      <svg class="preloader__icon" viewBox="0 0 24 24">
+        <path d="M17,8C8,10,5.9,16.17,3.82,21.34L5.71,22l1-2.3A4.49,4.49,0,0,0,8,20C19,20,22,3,22,3,21,5,14,5.25,9,6.25S2,11.5,2,13.5a6.23,6.23,0,0,0,1.4,3.3L3.3,17l.7-1.5A3.79,3.79,0,0,0,4.5,16C5,16,9,8,17,8Z"/>
+      </svg>
+      <span>Cargando...</span>
+    </div>
   </div>
 
-  <!-- Header/Navigation -->
-  <header class="header">
-    <div class="container">
-      <div class="header__logo">
-        <img src="assets/svgs/logo.svg" alt="Tomás Verde Logo" width="150" height="50">
-      </div>
-      <nav class="nav">
-        <button class="nav__toggle" aria-label="Abrir menú" aria-expanded="false">
-          <span class="nav__icon"></span>
-        </button>
-        <ul class="nav__menu">
-          <li><a href="#about">Sobre nosotros</a></li>
-          <li><a href="#services">Qué hacemos</a></li>
-          <li><a href="#how-it-works">Cómo funciona</a></li>
-          <li><a href="#benefits">Beneficios</a></li>
-          <li><a href="#plans">Planes</a></li>
-          <li><a href="#impact">Impacto</a></li>
-          <li><a href="#contact" class="btn btn--nav">Contacto</a></li>
-        </ul>
-      </nav>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav__container">
+      <a href="#" class="nav__logo">
+        <img src="img/logo.svg" alt="Tomás Verde Logo">
+      </a>
+      
+      <button class="nav__toggle" aria-label="Menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <ul class="nav__menu">
+        <li><a href="#inicio" class="nav__link active">Inicio</a></li>
+        <li><a href="#servicios" class="nav__link">Servicios</a></li>
+        <li><a href="#proceso" class="nav__link">Proceso</a></li>
+        <li><a href="#impacto" class="nav__link">Impacto</a></li>
+        <li><a href="#contacto" class="nav__link">Contacto</a></li>
+      </ul>
     </div>
-  </header>
+  </nav>
 
   <!-- Hero Section -->
-  <section id="hero" class="hero">
-    <div class="hero__overlay"></div>
-    <div class="container">
-      <div class="hero__content">
-        <h1 class="hero__title">Reciclaje de residuos orgánicos a domicilio en Pichilemu</h1>
-        <p class="hero__subtitle">Transforma tus desechos en recursos. Servicio cercano, comprometido y sustentable.</p>
-        <div class="hero__cta">
-          <a href="#contact" class="btn btn--primary">Agenda tu retiro</a>
-          <a href="https://wa.me/56958335909" class="btn btn--secondary" target="_blank" rel="noopener">Conversemos por WhatsApp</a>
-        </div>
-      </div>
+  <section id="inicio" class="hero">
+    <div class="hero__content">
+      <h1 class="hero__title">Transformando residuos en vida</h1>
+      <p class="hero__subtitle">Servicio de reciclaje orgánico y compostaje en Pichilemu</p>
+      <a href="#contacto" class="btn btn--primary hero__cta">Únete al cambio</a>
     </div>
-    <div class="hero__scroll">
-      <span class="hero__scroll-text">Desliza</span>
-      <svg class="hero__scroll-icon" viewBox="0 0 24 24" width="24" height="24">
-        <path d="M7 10l5 5 5-5"></path>
+    <div class="shape-divider">
+      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
       </svg>
     </div>
   </section>
 
-  <!-- About Section -->
-  <section id="about" class="about section">
-    <div class="container">
-      <h2 class="section__title">Sobre nosotros</h2>
-      <div class="about__content">
-        <div class="about__text">
-          <p class="about__description">En Tomás Verde nos encargamos de la recolección y compostaje de residuos orgánicos de hogares, restaurantes y empresas en Pichilemu. Somos comunidad, economía circular y cuidado del entorno en cada retiro de tu basura orgánica.</p>
-          <div class="about__values">
-            <div class="value">
-              <div class="value__icon">
-                <svg viewBox="0 0 24 24" width="48" height="48">
-                  <path d="M12 2L1 12h3v9h18v-9h3L12 2z"></path>
-                </svg>
-              </div>
-              <h3 class="value__title">Cercanía local</h3>
-              <p class="value__text">Trato personalizado y servicio dedicado a la comunidad de Pichilemu.</p>
-            </div>
-            <div class="value">
-              <div class="value__icon">
-                <svg viewBox="0 0 24 24" width="48" height="48">
-                  <path d="M12 22c6.5 0 10-4.5 10-9s-3.5-9-10-9S2 8.5 2 13s3.5 9 10 9z"></path>
-                  <path d="M12 16a3 3 0 100-6 3 3 0 000 6z"></path>
-                </svg>
-              </div>
-              <h3 class="value__title">Regeneración</h3>
-              <p class="value__text">Creemos en el poder regenerativo de la naturaleza y sus ciclos.</p>
-            </div>
-            <div class="value">
-              <div class="value__icon">
-                <svg viewBox="0 0 24 24" width="48" height="48">
-                  <path d="M4 6h16V4H4v2zm0 5h16v-2H4v2zm0 5h16v-2H4v2z"></path>
-                </svg>
-              </div>
-              <h3 class="value__title">Responsabilidad</h3>
-              <p class="value__text">Compromiso social y ambiental con nuestro entorno y futuro.</p>
-            </div>
-          </div>
-        </div>
-        <div class="about__image">
-          <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Tomás Verde en acción" width="500" height="600" loading="lazy">
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Services Section -->
-  <section id="services" class="services section">
+  <section id="servicios" class="section">
     <div class="container">
-      <h2 class="section__title">Qué hacemos</h2>
-      <div class="services__grid">
-        <div class="service">
-          <div class="service__icon">
-            <svg viewBox="0 0 24 24" width="56" height="56">
-              <path d="M19 5h-4V3H9v2H5v16h14V5zm-8 0h2V5h-2V5z"></path>
-            </svg>
+      <h2 class="section__title">Nuestros Servicios</h2>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card__icon">
+            <img src="img/recoleccion.svg" alt="Recolección">
           </div>
-          <h3 class="service__title">Recolección a domicilio</h3>
-          <p class="service__description">Retiramos tus residuos orgánicos semanalmente o según el plan que elijas.</p>
+          <h3 class="card__title">Recolección a Domicilio</h3>
+          <p class="card__text">Retiramos tus residuos orgánicos directamente de tu hogar o negocio, facilitando tu contribución al medio ambiente.</p>
         </div>
-        <div class="service">
-          <div class="service__icon">
-            <svg viewBox="0 0 24 24" width="56" height="56">
-              <path d="M12 22c6.5 0 10-4.5 10-9s-3.5-9-10-9S2 8.5 2 13s3.5 9 10 9z"></path>
-              <path d="M12 16a3 3 0 100-6 3 3 0 000 6z"></path>
-            </svg>
+        
+        <div class="card">
+          <div class="card__icon">
+            <img src="img/compostaje.svg" alt="Compostaje">
           </div>
-          <h3 class="service__title">Compostaje y revalorización</h3>
-          <p class="service__description">Transformamos los residuos en compost de alta calidad bajo estrictos estándares.</p>
+          <h3 class="card__title">Compostaje Profesional</h3>
+          <p class="card__text">Transformamos los residuos en compost de alta calidad mediante un proceso controlado y eficiente.</p>
         </div>
-        <div class="service">
-          <div class="service__icon">
-            <svg viewBox="0 0 24 24" width="56" height="56">
-              <path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 14H4V8h16v10z"></path>
-            </svg>
+        
+        <div class="card">
+          <div class="card__icon">
+            <img src="img/educacion.svg" alt="Educación">
           </div>
-          <h3 class="service__title">Gestión empresarial</h3>
-          <p class="service__description">Ofrecemos soluciones a medida para restaurantes y empresas con volumen de residuos.</p>
-        </div>
-        <div class="service">
-          <div class="service__icon">
-            <svg viewBox="0 0 24 24" width="56" height="56">
-              <path d="M17 6h-2V3h-6v3H7v13h10V6zm-6-1h2v1h-2V5z"></path>
-            </svg>
-          </div>
-          <h3 class="service__title">Retiro de ramas</h3>
-          <p class="service__description">Servicio complementario para manejo de residuos de jardín y poda.</p>
+          <h3 class="card__title">Educación Ambiental</h3>
+          <p class="card__text">Ofrecemos talleres y asesorías para que aprendas sobre compostaje y gestión de residuos.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- How It Works Section -->
-  <section id="how-it-works" class="how-it-works section">
+  <!-- Process Section -->
+  <section id="proceso" class="section section--alt">
     <div class="container">
-      <h2 class="section__title">Cómo funciona</h2>
-      <div class="timeline">
-        <div class="timeline__item">
-          <div class="timeline__number">1</div>
-          <div class="timeline__content">
-            <h3 class="timeline__title">Entrega del balde</h3>
-            <p class="timeline__text">Te proporcionamos un contenedor especial para que puedas separar tus residuos orgánicos.</p>
+      <h2 class="section__title">Nuestro Proceso</h2>
+      <div class="process">
+        <div class="process__step">
+          <div class="organic-frame">
+            <img src="img/paso1.jpg" alt="Recolección de residuos">
           </div>
+          <h3>1. Recolección</h3>
+          <p>Retiramos tus residuos orgánicos en contenedores especiales.</p>
         </div>
-        <div class="timeline__item">
-          <div class="timeline__number">2</div>
-          <div class="timeline__content">
-            <h3 class="timeline__title">Acumulas tus residuos</h3>
-            <p class="timeline__text">Depositas los restos vegetales y de cocina en el contenedor que te entregamos.</p>
+        
+        <div class="process__step">
+          <div class="organic-frame">
+            <img src="img/paso2.jpg" alt="Clasificación de residuos">
           </div>
+          <h3>2. Clasificación</h3>
+          <p>Separamos y preparamos los materiales para un compostaje óptimo.</p>
         </div>
-        <div class="timeline__item">
-          <div class="timeline__number">3</div>
-          <div class="timeline__content">
-            <h3 class="timeline__title">Recogemos según plan</h3>
-            <p class="timeline__text">Pasamos por tu domicilio en los días acordados para retirar tus residuos orgánicos.</p>
+        
+        <div class="process__step">
+          <div class="organic-frame">
+            <img src="img/paso3.jpg" alt="Proceso de compostaje">
           </div>
+          <h3>3. Compostaje</h3>
+          <p>Transformamos los residuos en compost mediante un proceso natural.</p>
         </div>
-        <div class="timeline__item">
-          <div class="timeline__number">4</div>
-          <div class="timeline__content">
-            <h3 class="timeline__title">Transformación en compost</h3>
-            <p class="timeline__text">Procesamos los residuos en nuestro centro de compostaje local para crear abono orgánico.</p>
+        
+        <div class="process__step">
+          <div class="organic-frame">
+            <img src="img/paso4.jpg" alt="Compost final">
           </div>
+          <h3>4. Resultado</h3>
+          <p>Obtenemos compost de calidad para enriquecer la tierra.</p>
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- Benefits Section -->
-  <section id="benefits" class="benefits section">
-    <div class="container">
-      <h2 class="section__title">Beneficios</h2>
-      <div class="benefits__grid">
-        <div class="benefit">
-          <div class="benefit__icon">🗑️</div>
-          <h3 class="benefit__title">Reducción de basura</h3>
-          <p class="benefit__text">Disminuye significativamente la cantidad de residuos que van al vertedero.</p>
-        </div>
-        <div class="benefit">
-          <div class="benefit__icon">🌿</div>
-          <h3 class="benefit__title">Compost artesanal</h3>
-          <p class="benefit__text">Obtenemos abono de alta calidad, ideal para huertos y jardines locales.</p>
-        </div>
-        <div class="benefit">
-          <div class="benefit__icon">🌎</div>
-          <h3 class="benefit__title">Impacto real</h3>
-          <p class="benefit__text">Contribuyes directamente a la reducción de emisiones y cuidas tu comunidad.</p>
-        </div>
-        <div class="benefit">
-          <div class="benefit__icon">🤝</div>
-          <h3 class="benefit__title">Economía circular</h3>
-          <p class="benefit__text">Fortaleces el ciclo local de producción y aprovechamiento de recursos.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Plans Section -->
-  <section id="plans" class="plans section">
-    <div class="container">
-      <h2 class="section__title">Planes de suscripción</h2>
-      <div class="plans__grid">
-        <div class="plan">
-          <div class="plan__header">
-            <h3 class="plan__title">Plan Básico</h3>
-            <p class="plan__frequency">1 retiro semanal</p>
-          </div>
-          <div class="plan__features">
-            <ul>
-              <li>Entrega de balde de 10L</li>
-              <li>Recogida en día coordinado</li>
-              <li>Reporte mensual</li>
-            </ul>
-          </div>
-          <a href="#contact" class="btn btn--plan">Solicitar información</a>
-        </div>
-        <div class="plan plan--featured">
-          <div class="plan__badge">Más popular</div>
-          <div class="plan__header">
-            <h3 class="plan__title">Plan Intensivo</h3>
-            <p class="plan__frequency">2 retiros semanales</p>
-          </div>
-          <div class="plan__features">
-            <ul>
-              <li>Entrega de balde de 15L</li>
-              <li>Recogida en días coordinados</li>
-              <li>Reporte mensual detallado</li>
-              <li>Descuento en retiro de ramas</li>
-            </ul>
-          </div>
-          <a href="#contact" class="btn btn--plan-featured">Solicitar información</a>
-        </div>
-        <div class="plan">
-          <div class="plan__header">
-            <h3 class="plan__title">Plan Mensual</h3>
-            <p class="plan__frequency">4 retiros al mes</p>
-          </div>
-          <div class="plan__features">
-            <ul>
-              <li>Entrega de balde de 10L</li>
-              <li>Flexibilidad en días de recogida</li>
-              <li>Reporte mensual</li>
-            </ul>
-          </div>
-          <a href="#contact" class="btn btn--plan">Solicitar información</a>
-        </div>
-      </div>
-      <p class="plans__note">Contáctanos para personalizar un plan que se adapte a tus necesidades específicas.</p>
+    <div class="shape-divider shape-divider--bottom">
+      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+      </svg>
     </div>
   </section>
 
   <!-- Impact Section -->
-  <section id="impact" class="impact section">
+  <section id="impacto" class="section">
     <div class="container">
-      <h2 class="section__title">Nuestro impacto local</h2>
-      <div class="impact__content">
-        <div class="impact__stats">
-          <div class="stat">
-            <div class="stat__number" data-count="200676">0</div>
-            <div class="stat__unit">kg</div>
-            <div class="stat__label">Residuos recolectados</div>
-          </div>
-          <div class="stat">
-            <div class="stat__number" data-count="60202">0</div>
-            <div class="stat__unit">kg</div>
-            <div class="stat__label">Compost generado</div>
-          </div>
+      <h2 class="section__title">Nuestro Impacto</h2>
+      <div class="impact-grid">
+        <div class="impact-number">
+          <div class="impact-number__value">5000+</div>
+          <div class="impact-number__label">Kg de residuos reciclados</div>
         </div>
-        <div class="impact__message">
-          <blockquote>
-            "En marzo 2025, recolectamos 200.676 kg de residuos y generamos 60.202,8 kg de compost. Eso evita toneladas en vertederos y fertiliza cientos de huertos."
-          </blockquote>
+        
+        <div class="impact-number">
+          <div class="impact-number__value">100+</div>
+          <div class="impact-number__label">Familias participantes</div>
+        </div>
+        
+        <div class="impact-number">
+          <div class="impact-number__value">1000+</div>
+          <div class="impact-number__label">Kg de compost producido</div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Gallery Section -->
-  <section id="gallery" class="gallery section">
-    <div class="container">
-      <h2 class="section__title">Nuestra labor</h2>
-      <div class="gallery__grid">
-        <a href="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" class="gallery__item" data-gallery="gallery">
-          <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Proceso de compostaje" width="300" height="200" loading="lazy">
-        </a>
-        <a href="https://images.unsplash.com/photo-1604187351574-c75ca79f5807?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" class="gallery__item" data-gallery="gallery">
-          <img src="https://images.unsplash.com/photo-1604187351574-c75ca79f5807?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Recolección de residuos" width="300" height="200" loading="lazy">
-        </a>
-        <a href="https://images.unsplash.com/photo-1591195854242-8804588825b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" class="gallery__item" data-gallery="gallery">
-          <img src="https://images.unsplash.com/photo-1591195854242-8804588825b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Compost terminado" width="300" height="200" loading="lazy">
-        </a>
-        <a href="https://images.unsplash.com/photo-1621929747188-0b4dc28498d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" class="gallery__item" data-gallery="gallery">
-          <img src="https://images.unsplash.com/photo-1621929747188-0b4dc28498d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Equipo de Tomás Verde" width="300" height="200" loading="lazy">
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials Section -->
-  <section id="testimonials" class="testimonials section">
-    <div class="container">
-      <h2 class="section__title">Testimonios</h2>
-      <div class="testimonials__slider">
+      
+      <div class="testimonials">
         <div class="testimonial">
-          <div class="testimonial__content">
-            <p class="testimonial__text">"Desde que Tomás Verde comenzó, hemos reducido la basura en un 50% y ahora tenemos compost premium para nuestro huerto."</p>
-            <div class="testimonial__author">
-              <div class="testimonial__name">Ana</div>
-              <div class="testimonial__info">Vecina de Pichilemu</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial">
-          <div class="testimonial__content">
-            <p class="testimonial__text">"El servicio es excepcional, siempre puntuales y atentos. Ha cambiado nuestra relación con los residuos orgánicos."</p>
-            <div class="testimonial__author">
-              <div class="testimonial__name">Carlos</div>
-              <div class="testimonial__info">Restaurante local</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial">
-          <div class="testimonial__content">
-            <p class="testimonial__text">"Increíble ver cómo algo que tirábamos a la basura ahora se convierte en un recurso valioso para la comunidad."</p>
-            <div class="testimonial__author">
-              <div class="testimonial__name">María</div>
-              <div class="testimonial__info">Hostal en Pichilemu</div>
-            </div>
-          </div>
+          <p class="testimonial__text">"El servicio de Tomás Verde ha cambiado completamente la manera en que manejamos nuestros residuos. ¡Es increíble ver cómo nuestros desechos se transforman en algo útil!"</p>
+          <div class="testimonial__author">María González - Vecina de Pichilemu</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="contact section">
+  <section id="contacto" class="section section--alt">
     <div class="container">
-      <h2 class="section__title">¿Listo para que tus residuos se conviertan en vida?</h2>
-      <div class="contact__content">
-        <form id="contactForm" class="contact__form">
-          <div class="form__group">
-            <label for="name">Nombre</label>
-            <input type="text" id="name" name="name" required>
+      <h2 class="section__title">Únete al Cambio</h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>¿Listo para comenzar?</h3>
+          <ul class="organic-list">
+            <li>Servicio personalizado</li>
+            <li>Recolección programada</li>
+            <li>Asesoría continua</li>
+            <li>Reportes de impacto</li>
+          </ul>
+          
+          <div class="contact-methods">
+            <a href="tel:+56912345678" class="btn btn--secondary">
+              <i class="icon-phone"></i> +569 1234 5678
+            </a>
+            <a href="mailto:contacto@tomasverde.cl" class="btn btn--secondary">
+              <i class="icon-mail"></i> contacto@tomasverde.cl
+            </a>
           </div>
-          <div class="form__group">
-            <label for="email">Correo electrónico</label>
+        </div>
+        
+        <form class="contact-form">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email</label>
             <input type="email" id="email" name="email" required>
           </div>
-          <div class="form__group">
-            <label for="address">Dirección</label>
-            <input type="text" id="address" name="address" required>
+          
+          <div class="form-group">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" required></textarea>
           </div>
-          <div class="form__group">
-            <label for="message">Mensaje</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-          </div>
-          <button type="submit" class="btn btn--primary btn--full">Enviar mensaje</button>
+          
+          <button type="submit" class="btn btn--primary">Enviar mensaje</button>
         </form>
-        <div class="contact__whatsapp">
-          <h3>Contacto directo</h3>
-          <p>Comunícate con nosotros directamente a través de WhatsApp para una respuesta inmediata.</p>
-          <a href="https://wa.me/56958335909" class="btn btn--whatsapp" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" width="24" height="24">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path>
-            </svg>
-            Enviar WhatsApp a Tomás
-          </a>
-        </div>
       </div>
     </div>
   </section>
@@ -405,57 +221,46 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <div class="footer__content">
-        <div class="footer__logo">
-          <img src="assets/svgs/logo-white.svg" alt="Tomás Verde Logo" width="150" height="50">
-          <p class="footer__tagline">Transformando residuos en recursos</p>
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <img src="img/logo-white.svg" alt="Tomás Verde Logo" class="footer__logo">
+          <p>Transformando residuos orgánicos en vida nueva para nuestros suelos.</p>
         </div>
-        <div class="footer__contact">
-          <h3>Contacto</h3>
+        
+        <div class="footer__links">
+          <h4>Enlaces rápidos</h4>
           <ul>
-            <li>
-              <a href="https://www.instagram.com/tomasverde.cl/" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" width="18" height="18">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"></path>
-                </svg>
-                @tomasverde.cl
-              </a>
-            </li>
-            <li>
-              <a href="https://wa.me/56958335909" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" width="18" height="18">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path>
-                </svg>
-                +56 9 5833 5909
-              </a>
-            </li>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#proceso">Proceso</a></li>
+            <li><a href="#impacto">Impacto</a></li>
+            <li><a href="#contacto">Contacto</a></li>
           </ul>
         </div>
-        <div class="footer__legal">
-          <h3>Legal</h3>
-          <ul>
-            <li><a href="#">Política de privacidad</a></li>
-            <li><a href="#">Términos y condiciones</a></li>
-          </ul>
+        
+        <div class="footer__social">
+          <h4>Síguenos</h4>
+          <div class="social-links">
+            <a href="https://instagram.com/tomasverde" target="_blank" rel="noopener noreferrer">
+              <i class="icon-instagram"></i>
+            </a>
+            <a href="https://facebook.com/tomasverde" target="_blank" rel="noopener noreferrer">
+              <i class="icon-facebook"></i>
+            </a>
+            <a href="https://wa.me/56912345678" target="_blank" rel="noopener noreferrer">
+              <i class="icon-whatsapp"></i>
+            </a>
+          </div>
         </div>
       </div>
+      
       <div class="footer__bottom">
         <p>&copy; 2024 Tomás Verde. Todos los derechos reservados.</p>
       </div>
     </div>
   </footer>
 
-  <!-- Back to top button -->
-  <button class="back-to-top" aria-label="Volver arriba">
-    <svg viewBox="0 0 24 24" width="24" height="24">
-      <path d="M7 14l5-5 5 5"></path>
-    </svg>
-  </button>
-
   <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-  <script src="js/main.js"></script>
+  <script src="./js/main.js"></script>
 </body>
 </html>

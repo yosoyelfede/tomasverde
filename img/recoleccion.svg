@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Bucket -->
+  <path d="M20,25 L60,25 L65,70 L15,70 Z" 
+        fill="none" 
+        stroke="#2C5530" 
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+  
+  <!-- Handle -->
+  <path d="M25,25 C25,15 55,15 55,25" 
+        fill="none" 
+        stroke="#2C5530" 
+        stroke-width="3"
+        stroke-linecap="round"/>
+  
+  <!-- Organic waste -->
+  <path d="M25,35 C30,32 35,38 40,35 C45,32 50,38 55,35" 
+        fill="none" 
+        stroke="#8B4513" 
+        stroke-width="3"
+        stroke-linecap="round"/>
+  
+  <!-- Leaves -->
+  <path d="M30,45 C25,50 35,55 30,50" 
+        fill="none" 
+        stroke="#2C5530" 
+        stroke-width="2"
+        stroke-linecap="round"/>
+  
+  <path d="M50,45 C45,50 55,55 50,50" 
+        fill="none" 
+        stroke="#2C5530" 
+        stroke-width="2"
+        stroke-linecap="round"/>
+</svg> 
