@@ -13,7 +13,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build-and-deploy:
@@ -37,6 +37,17 @@ jobs:
       - name: Build site
         run: |
           npm run build
+          ls -la dist || true
+          echo "Build complete. Checking dist directory..."
+          
+      - name: Debug build output
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "Directory contents:"
+          ls -la
+          echo "Dist directory contents:"
+          ls -la dist || echo "dist directory not found"
           
       - name: Setup Pages
         uses: actions/configure-pages@v4
