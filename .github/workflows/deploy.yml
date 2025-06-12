@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  build-and-deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -25,6 +25,31 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y imagemagick
+          npm install -g sass
+          npm ci
+          
+      - name: Create placeholder images
+        run: |
+          mkdir -p img/placeholders
+          for i in {1..4}; do
+            convert -size 800x600 xc:lightgray -gravity center -pointsize 40 \
+            -annotate 0 "Proceso paso $i" "img/paso$i.jpg" || true
+          done
+          
+      - name: Compile SASS
+        run: |
+          cd css
+          sass --style=compressed --no-source-map styles.scss:styles.css
+          
       - name: Setup Pages
         uses: actions/configure-pages@v4
         
