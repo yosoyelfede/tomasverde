@@ -2,8 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -11,55 +10,41 @@ permissions:
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
-  build-and-deploy:
-    timeout-minutes: 10  # Add timeout to prevent indefinite hanging
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1  # Shallow clone for faster checkout
+      - uses: actions/checkout@v4
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'  # Enable npm caching
           
       - name: Install dependencies
-        run: |
-          npm ci --prefer-offline  # Use cached packages when possible
+        run: npm install
           
-      - name: Build site
-        run: |
-          npm run build
+      - name: Clean previous builds
+        run: npm run clean || true
           
-      - name: Debug build output
-        if: always()  # Run even if previous step fails
-        run: |
-          echo "Build directory contents:"
-          ls -la dist || echo "dist directory not found"
-          
+      - name: Build
+        run: npm run build
+        
       - name: Setup Pages
         uses: actions/configure-pages@v4
         
       - name: Upload artifact
-        if: success()  # Only run if build succeeds
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
-          
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy to GitHub Pages
-        if: success()  # Only run if previous steps succeed
         id: deployment
         uses: actions/deploy-pages@v4 
