@@ -1,0 +1,30 @@
+{
+  "name": "tomasverde",
+  "version": "1.0.0",
+  "description": "Landing page para Tomás Verde - Reciclaje de residuos orgánicos en Pichilemu",
+  "main": "index.html",
+  "scripts": {
+    "sass": "sass --watch css/styles.scss:css/styles.css",
+    "sass:build": "sass --no-source-map --style=compressed css/styles.scss:css/styles.css",
+    "serve": "npx serve",
+    "dev": "concurrently \"npm run sass\" \"npm run serve\"",
+    "build": "npm run sass:build"
+  },
+  "keywords": [
+    "reciclaje",
+    "compostaje",
+    "landing-page",
+    "pichilemu"
+  ],
+  "author": "",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "sass": "^1.64.1",
+    "serve": "^14.2.0"
+  },
+  "dependencies": {
+    "gsap": "^3.11.4",
+    "glightbox": "^3.2.0"
+  }
+} 
