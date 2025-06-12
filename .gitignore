@@ -36,10 +36,6 @@ logs
 *.sass.map
 *.scss.map
 
-# Compiled CSS
-css/styles.css
-css/styles.css.map
-
 # OS generated files
 ._*
 .Spotlight-V100
