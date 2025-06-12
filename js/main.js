@@ -29,6 +29,272 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Initialize contact form
   initContactForm();
+  
+  // Initialize AOS
+  AOS.init({
+    duration: 1000,
+    easing: 'ease-out-back',
+    once: true,
+    offset: 50
+  });
+  
+  // Initialize Locomotive Scroll
+  const scroll = new LocomotiveScroll({
+    el: document.querySelector('[data-scroll-container]'),
+    smooth: true,
+    multiplier: 1,
+    lerp: 0.05
+  });
+  
+  // Custom cursor
+  const cursor = document.querySelector('.cursor');
+  const cursorFollower = document.querySelector('.cursor-follower');
+  
+  document.addEventListener('mousemove', (e) => {
+    gsap.to(cursor, {
+      x: e.clientX,
+      y: e.clientY,
+      duration: 0.1
+    });
+    
+    gsap.to(cursorFollower, {
+      x: e.clientX,
+      y: e.clientY,
+      duration: 0.3
+    });
+  });
+  
+  // Magnetic buttons
+  const magneticButtons = document.querySelectorAll('.magnetic');
+  
+  magneticButtons.forEach(button => {
+    button.addEventListener('mousemove', (e) => {
+      const rect = button.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      
+      gsap.to(button, {
+        x: x * 0.3,
+        y: y * 0.3,
+        duration: 0.3
+      });
+    });
+    
+    button.addEventListener('mouseleave', () => {
+      gsap.to(button, {
+        x: 0,
+        y: 0,
+        duration: 0.3
+      });
+    });
+  });
+  
+  // Split text animation
+  const splitTextElements = document.querySelectorAll('.split-text');
+  
+  splitTextElements.forEach(element => {
+    const text = new SplitType(element, { types: 'chars' });
+    
+    gsap.from(text.chars, {
+      opacity: 0,
+      y: 20,
+      duration: 0.5,
+      stagger: 0.02,
+      ease: 'back.out'
+    });
+  });
+  
+  // Smooth scroll for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      
+      if (target) {
+        gsap.to(window, {
+          duration: 1,
+          scrollTo: {
+            y: target,
+            offsetY: 70
+          },
+          ease: "power2.inOut"
+        });
+      }
+    });
+  });
+  
+  // Header scroll effect
+  let lastScroll = 0;
+  const header = document.querySelector('.header');
+  
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll <= 0) {
+      header.classList.remove('header--hidden');
+      return;
+    }
+    
+    if (currentScroll > lastScroll && !header.classList.contains('header--hidden')) {
+      header.classList.add('header--hidden');
+    } else if (currentScroll < lastScroll && header.classList.contains('header--hidden')) {
+      header.classList.remove('header--hidden');
+    }
+    
+    lastScroll = currentScroll;
+  });
+  
+  // Mobile menu
+  const menuToggle = document.querySelector('.nav__toggle');
+  const navMenu = document.querySelector('.nav__menu');
+  
+  if (menuToggle && navMenu) {
+    menuToggle.addEventListener('click', () => {
+      const isOpen = menuToggle.classList.contains('active');
+      
+      if (!isOpen) {
+        menuToggle.classList.add('active');
+        gsap.to(navMenu, {
+          x: 0,
+          duration: 0.5,
+          ease: "power2.out"
+        });
+        
+        // Animar items del menú
+        gsap.from('.nav__menu li', {
+          x: 50,
+          opacity: 0,
+          duration: 0.3,
+          stagger: 0.1,
+          ease: "power2.out"
+        });
+      } else {
+        menuToggle.classList.remove('active');
+        gsap.to(navMenu, {
+          x: '100%',
+          duration: 0.5,
+          ease: "power2.in"
+        });
+      }
+    });
+  }
+  
+  // Initialize GLightbox
+  const lightbox = GLightbox({
+    selector: '[data-gallery]',
+    touchNavigation: true,
+    loop: true
+  });
+  
+  // Initialize Swiper for testimonials
+  const testimonialSwiper = new Swiper('.testimonials__slider', {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: 2
+      },
+      1024: {
+        slidesPerView: 3
+      }
+    }
+  });
+  
+  // Scroll animations with GSAP ScrollTrigger
+  gsap.registerPlugin(ScrollTrigger);
+  
+  // Animate sections on scroll
+  gsap.utils.toArray('.section').forEach(section => {
+    gsap.from(section, {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 80%',
+        end: 'top 50%',
+        scrub: true
+      }
+    });
+  });
+  
+  // Parallax effect for hero section
+  gsap.to('.hero', {
+    backgroundPosition: `50% ${innerHeight / 2}px`,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.hero',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: true
+    }
+  });
+  
+  // Service cards animation
+  gsap.utils.toArray('.service').forEach((service, i) => {
+    gsap.from(service, {
+      y: 50,
+      opacity: 0,
+      duration: 0.8,
+      delay: i * 0.2,
+      scrollTrigger: {
+        trigger: service,
+        start: 'top 80%'
+      }
+    });
+  });
+  
+  // Plan cards animation
+  gsap.utils.toArray('.plan').forEach((plan, i) => {
+    gsap.from(plan, {
+      y: 50,
+      opacity: 0,
+      duration: 0.8,
+      delay: i * 0.2,
+      scrollTrigger: {
+        trigger: plan,
+        start: 'top 80%'
+      }
+    });
+  });
+  
+  // Contact form animation
+  const contactForm = document.querySelector('.contact__form');
+  if (contactForm) {
+    gsap.from(contactForm, {
+      x: 50,
+      opacity: 0,
+      duration: 1,
+      scrollTrigger: {
+        trigger: contactForm,
+        start: 'top 80%'
+      }
+    });
+  }
+  
+  // Update cursor on interactive elements
+  const interactiveElements = document.querySelectorAll('a, button, .magnetic, input, textarea');
+  
+  interactiveElements.forEach(element => {
+    element.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'scale(1.5)';
+      cursorFollower.style.transform = 'scale(1.5)';
+    });
+    
+    element.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'scale(1)';
+      cursorFollower.style.transform = 'scale(1)';
+    });
+  });
 });
 
 // Mobile Navigation
@@ -82,22 +348,24 @@ function initScrollAnimations() {
     
     heroTl
       .from(heroTitle, { 
-        y: 50, 
+        y: 100, 
         opacity: 0, 
-        duration: 1, 
-        ease: 'power3.out' 
+        duration: 1.5, 
+        ease: "elastic.out(1, 0.5)" 
       })
       .from(heroSubtitle, { 
-        y: 30, 
+        y: 50, 
         opacity: 0, 
-        duration: 1, 
-        ease: 'power3.out' 
+        duration: 1.2, 
+        delay: 0.5, 
+        ease: "elastic.out(1, 0.5)" 
       }, '-=0.6')
       .from(heroCta, { 
         y: 30, 
         opacity: 0, 
         duration: 1, 
-        ease: 'power3.out' 
+        delay: 1, 
+        ease: "power3.out" 
       }, '-=0.6');
   }
   
@@ -257,13 +525,44 @@ function initScrollAnimations() {
     gsap.from(title, {
       scrollTrigger: {
         trigger: title,
-        start: 'top 85%',
-        toggleActions: 'play none none none'
+        start: "top 80%",
+        end: "top 20%",
+        scrub: 1
       },
-      y: 30,
+      y: 50,
       opacity: 0,
-      duration: 0.8,
-      ease: 'power2.out'
+      duration: 1,
+      ease: "elastic.out(1, 0.3)"
+    });
+  });
+
+  // Cards with growth effect
+  gsap.utils.toArray('.card').forEach(card => {
+    gsap.from(card, {
+      scrollTrigger: {
+        trigger: card,
+        start: "top 85%",
+        end: "top 15%",
+        scrub: 1
+      },
+      scale: 0.8,
+      opacity: 0,
+      duration: 1,
+      ease: "power2.out"
+    });
+  });
+
+  // Parallax effect on images
+  gsap.utils.toArray('.parallax-img').forEach(img => {
+    gsap.to(img, {
+      scrollTrigger: {
+        trigger: img,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1
+      },
+      y: -50,
+      ease: "none"
     });
   });
 }
@@ -444,3 +743,97 @@ function submitForm(name, email, address, message) {
     }, 5000);
   }, 2000);
 }
+
+// Falling leaves animation
+function createFallingLeaves() {
+  const leaves = document.createElement('div');
+  leaves.className = 'falling-leaves';
+  document.body.appendChild(leaves);
+
+  for (let i = 0; i < 15; i++) {
+    const leaf = document.createElement('div');
+    leaf.className = 'leaf';
+    leaves.appendChild(leaf);
+
+    const randomX = Math.random() * window.innerWidth;
+    const randomDelay = Math.random() * 5;
+    const randomDuration = 10 + Math.random() * 20;
+
+    gsap.set(leaf, {
+      x: randomX,
+      y: -100,
+      rotation: Math.random() * 360
+    });
+
+    gsap.to(leaf, {
+      y: window.innerHeight + 100,
+      rotation: Math.random() * 360,
+      duration: randomDuration,
+      delay: randomDelay,
+      ease: "none",
+      repeat: -1,
+      onRepeat: () => {
+        gsap.set(leaf, {
+          x: Math.random() * window.innerWidth,
+          y: -100
+        });
+      }
+    });
+  }
+}
+
+// Start falling leaves animation
+createFallingLeaves();
+
+// Hover effect on buttons
+const buttons = document.querySelectorAll('.btn');
+buttons.forEach(btn => {
+  btn.addEventListener('mousemove', (e) => {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    gsap.to(btn, {
+      duration: 0.3,
+      ease: "power2.out",
+      scale: 1.05,
+      boxShadow: `${(x - rect.width/2)/10}px ${(y - rect.height/2)/10}px 20px rgba(0,0,0,0.15)`
+    });
+  });
+
+  btn.addEventListener('mouseleave', () => {
+    gsap.to(btn, {
+      duration: 0.3,
+      scale: 1,
+      boxShadow: '0 10px 20px rgba(0,0,0,0.1)'
+    });
+  });
+});
+
+// Active section in menu
+function setActiveSection() {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav__link');
+  
+  window.addEventListener('scroll', () => {
+    let current = '';
+    
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      
+      if (pageYOffset >= sectionTop - 200) {
+        current = section.getAttribute('id');
+      }
+    });
+    
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href').slice(1) === current) {
+        link.classList.add('active');
+      }
+    });
+  });
+}
+
+setActiveSection();
