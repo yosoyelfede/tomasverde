@@ -4,9 +4,8 @@
   "description": "Sitio web de Tomás Verde - Reciclaje orgánico en Pichilemu",
   "main": "index.js",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html --public-url ./",
-    "sass": "sass --watch css:css"
+    "sass": "sass css/styles.scss:css/styles.css --style=compressed --no-source-map",
+    "watch": "sass --watch css:css"
   },
   "author": "Tomás Verde",
   "license": "ISC",
@@ -14,7 +13,6 @@
     "gsap": "^3.12.2"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.5",
     "sass": "^1.69.5"
   }
 } 
