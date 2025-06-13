@@ -6,265 +6,1399 @@
   <meta name="description" content="Servicio de reciclaje y compostaje orgánico en Pichilemu. Transformamos residuos orgánicos en compost de calidad para un futuro más sostenible.">
   <title>Tomás Verde - Reciclaje Orgánico en Pichilemu</title>
   
-  <!-- Fonts -->
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Estilos críticos para un diseño visualmente impresionante y prevenir FOUC -->
+  <style>
+    /* Paleta de colores natural y orgánica - Versión glassmorphism */
+    :root {
+      --color-dark-green: rgba(44, 85, 48, 0.8);     /* Verde bosque oscuro */
+      --color-medium-green: rgba(74, 124, 89, 0.7);   /* Verde medio */
+      --color-light-green: rgba(139, 195, 74, 0.6);    /* Verde claro */
+      --color-moss: rgba(125, 140, 56, 0.7);           /* Verde musgo */
+      --color-dark-earth: rgba(94, 76, 62, 0.8);     /* Tierra oscura */
+      --color-medium-earth: rgba(139, 69, 19, 0.7);   /* Tierra media */
+      --color-light-earth: rgba(166, 124, 82, 0.6);    /* Tierra clara */
+      --color-sand: rgba(212, 190, 163, 0.5);           /* Arena */
+      --color-cream: rgba(247, 244, 238, 0.9);          /* Crema */
+      --color-leaf-gold: rgba(212, 160, 23, 0.7);      /* Dorado hoja */
+      
+      /* Efectos glassmorphism */
+      --glass-bg: rgba(255, 255, 255, 0.15);
+      --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+      --glass-border: none;
+      --glass-blur: blur(8px);
+      --glass-radius: 20px;
+      
+      /* Efectos de elevación */
+      --elevation-1: 0 10px 30px rgba(0, 0, 0, 0.08);
+      --elevation-2: 0 15px 35px rgba(0, 0, 0, 0.12);
+      --elevation-3: 0 20px 40px rgba(0, 0, 0, 0.16);
+    }
+    
+    /* Reset y base */
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      height: 100%;
+    }
+    
+    /* GIF de fondo */
+    #background-gif {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      width: 100%;
+      height: 100%;
+      z-index: -100;
+      background-image: url('img/tomasverde.gif');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    
+    /* Capa de superposición con gradiente verde que se oscurece */
+    .video-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, 
+        rgba(76, 175, 80, 0.05) 0%,
+        rgba(76, 175, 80, 0.07) 5%,
+        rgba(76, 175, 80, 0.09) 10%,
+        rgba(56, 142, 60, 0.12) 15%,
+        rgba(56, 142, 60, 0.15) 20%, 
+        rgba(56, 142, 60, 0.18) 25%,
+        rgba(56, 142, 60, 0.2) 30%,
+        rgba(46, 125, 50, 0.23) 35%,
+        rgba(46, 125, 50, 0.25) 40%,
+        rgba(46, 125, 50, 0.28) 45%,
+        rgba(27, 94, 32, 0.3) 50%, 
+        rgba(27, 94, 32, 0.33) 55%,
+        rgba(27, 94, 32, 0.35) 60%,
+        rgba(21, 56, 21, 0.38) 65%,
+        rgba(21, 56, 21, 0.4) 70%, 
+        rgba(21, 56, 21, 0.43) 75%,
+        rgba(21, 56, 21, 0.45) 80%,
+        rgba(0, 20, 0, 0.48) 85%,
+        rgba(0, 20, 0, 0.5) 90%,
+        rgba(0, 20, 0, 0.53) 95%,
+        rgba(0, 20, 0, 0.55) 100%);
+      z-index: -90;
+      pointer-events: none;
+    }
+    
+    /* Contenedor principal para el contenido que se desplaza */
+    .content-wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+    
+    body {
+      color: #fff;
+      line-height: 1.6;
+      transition: background-color 1s ease;
+      overflow-x: hidden;
+      background: transparent;
+    }
+    
+    /* Estilos globales para glassmorphism */
+    .glass {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      box-shadow: var(--glass-shadow);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--glass-radius);
+    }
+    
+    /* Asegurarse de que las animaciones funcionen */
+    .card, .timeline-card, .stat-card, .testimonial-card {
+      will-change: transform, opacity;
+      transform: translateY(0);
+      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    
+    .card:hover, .timeline-card:hover, .stat-card:hover, .testimonial-card:hover {
+      transform: translateY(-10px) scale(1.02);
+    }
+    
+    /* Animaciones globales */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Asegurar que los elementos aparezcan animados al hacer scroll */
+    .animate-on-scroll {
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    
+    /* Prevenir flickering */
+    body {
+      opacity: 0;
+      animation: fadeIn 0.8s ease-in-out forwards;
+    }
+    
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    
+    /* Deshabilitar todas las animaciones basadas en scroll hasta que JS se cargue */
+    .fade-in, .slide-up, .slide-left, .slide-right, .scale-in {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+    
+    /* Prevenir parpadeo (flickering) */
+    .card-grid, .card {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+    
+    /* Estilos de tarjetas mejorados */
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #2C5530, #8B4513);
+      border-radius: 5px 5px 0 0;
+    }
+    
+    .card__title {
+      color: #2C5530;
+      font-family: 'Caveat', cursive;
+      font-size: 2.2rem;
+      margin: 1rem 0;
+    }
+    
+    /* Hero mejorado */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: visible; /* Cambiado de hidden a visible */
+      border-bottom: none;
+      box-shadow: none;
+      background: transparent;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .hero:after {
+      content: none; /* Eliminamos este pseudo-elemento que podría estar causando la línea */
+    }
+    
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 3rem;
+      text-align: center;
+      color: #fff;
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-radius: 20px;
+      border: none;
+      box-shadow: none;
+    }
+    
+    .hero__title {
+      font-size: 4.5rem;
+      font-family: 'Amatic SC', cursive;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+    }
+    
+    .hero__subtitle {
+      font-size: 1.8rem;
+      font-family: 'Caveat', cursive;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    }
+    
+    .btn {
+      background: #2C5530;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: inline-block;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(44, 85, 48, 0.4);
+    }
+    
+    .btn:hover {
+      background: #234426;
+      transform: translateY(-3px);
+      box-shadow: 0 7px 20px rgba(44, 85, 48, 0.5);
+    }
+
+    /* Clase para elementos solo para lectores de pantalla */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+  
+  <!-- Fonts con preconexión para carga más rápida -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Caveat:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
-  <!-- Styles -->
-  <link rel="stylesheet" href="./css/styles.css">
+  <!-- Styles - Cargados vía JavaScript para mejor control -->
+  <script>
+    // Cargar CSS de manera no bloqueante
+    const linkElement = document.createElement('link');
+    linkElement.rel = 'stylesheet';
+    linkElement.href = 'css/styles.css';
+    document.head.appendChild(linkElement);
+  </script>
   
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+  <!-- GSAP - Cargados con defer -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js" defer></script>
   
-  <!-- Main JavaScript -->
-  <script src="./js/main.js" defer></script>
+  <!-- Additional libraries - Cargados con defer para no bloquear el renderizado -->
+  <!-- GLightbox -->
+  <script>
+    // Cargar CSS de manera no bloqueante
+    const glightboxCSS = document.createElement('link');
+    glightboxCSS.rel = 'stylesheet';
+    glightboxCSS.href = 'https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css';
+    document.head.appendChild(glightboxCSS);
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>
+  
+  <!-- Swiper -->
+  <script>
+    // Cargar CSS de manera no bloqueante
+    const swiperCSS = document.createElement('link');
+    swiperCSS.rel = 'stylesheet';
+    swiperCSS.href = 'https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css';
+    document.head.appendChild(swiperCSS);
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js" defer></script>
+  
+  <!-- AOS -->
+  <script>
+    // Cargar CSS de manera no bloqueante
+    const aosCSS = document.createElement('link');
+    aosCSS.rel = 'stylesheet';
+    aosCSS.href = 'https://unpkg.com/aos@2.3.1/dist/aos.css';
+    document.head.appendChild(aosCSS);
+  </script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+  
+  <!-- SplitType -->
+  <script src="https://unpkg.com/split-type" defer></script>
+  
+  <!-- Particles.js para efectos visuales de partículas -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
+
+  <!-- Main JavaScript - Cargado después de que el DOM está listo -->
+  <script>
+    // Cargar el script principal después de que el DOM esté listo
+    document.addEventListener('DOMContentLoaded', function() {
+      const script = document.createElement('script');
+      script.src = 'js/main.js';
+      document.body.appendChild(script);
+      
+      // Animaciones para elementos con animate-on-scroll
+      const animateElements = document.querySelectorAll('.animate-on-scroll');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      animateElements.forEach(element => {
+        observer.observe(element);
+      });
+    });
+  </script>
 </head>
-<body>
-  <!-- Preloader -->
-  <div class="preloader">
-    <div class="preloader__content">
-      <svg class="preloader__icon" viewBox="0 0 24 24">
-        <path d="M17,8C8,10,5.9,16.17,3.82,21.34L5.71,22l1-2.3A4.49,4.49,0,0,0,8,20C19,20,22,3,22,3,21,5,14,5.25,9,6.25S2,11.5,2,13.5a6.23,6.23,0,0,0,1.4,3.3L3.3,17l.7-1.5A3.79,3.79,0,0,0,4.5,16C5,16,9,8,17,8Z"/>
+<body data-scroll-container>
+  <!-- GIF de fondo -->
+  <div id="background-gif"></div>
+  
+  <!-- Capa de superposición para mejorar la legibilidad -->
+  <div class="video-overlay"></div>
+  
+  <!-- Contenedor para el contenido desplazable -->
+  <div class="content-wrapper">
+  
+  <!-- Script para eliminar el preloader inmediatamente -->
+  <script>
+    // Eliminar el preloader inmediatamente para evitar que se quede atascado
+    document.addEventListener('DOMContentLoaded', function() {
+      const preloader = document.getElementById('preloader');
+      if (preloader) {
+        preloader.style.opacity = '0';
+        setTimeout(() => {
+          preloader.parentNode.removeChild(preloader);
+        }, 500);
+      }
+    });
+  </script>
+  
+  <!-- Preloader con ID para poder eliminarlo fácilmente -->
+  <div id="preloader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 10000; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease;">
+    <div style="text-align: center;">
+      <svg viewBox="0 0 24 24" width="60" height="60" style="margin: 0 auto 1rem;">
+        <path fill="#2C5530" d="M17,8C8,10,5.9,16.17,3.82,21.34L5.71,22l1-2.3A4.49,4.49,0,0,0,8,20C19,20,22,3,22,3,21,5,14,5.25,9,6.25S2,11.5,2,13.5a6.23,6.23,0,0,0,1.4,3.3L3.3,17l.7-1.5A3.79,3.79,0,0,0,4.5,16C5,16,9,8,17,8Z"/>
       </svg>
-      <span>Cargando...</span>
+      <span style="font-family: sans-serif; font-size: 1.6rem; color: #2C5530;">Cargando...</span>
     </div>
   </div>
+  
+  <!-- Script para asegurar que el preloader se elimine -->
+  <script>
+    // Backup: eliminar el preloader después de un máximo de 2 segundos
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        const preloader = document.getElementById('preloader');
+        if (preloader && preloader.parentNode) {
+          preloader.parentNode.removeChild(preloader);
+        }
+      }, 100);
+    });
+    
+    // Último recurso: eliminar el preloader después de 3 segundos sin importar qué
+    setTimeout(() => {
+      const preloader = document.getElementById('preloader');
+      if (preloader && preloader.parentNode) {
+        preloader.parentNode.removeChild(preloader);
+      }
+    }, 3000);
+  </script>
 
-  <!-- Navigation -->
-  <nav class="nav">
-    <div class="nav__container">
-      <a href="#" class="nav__logo">
-        <img src="img/logo.svg" alt="Tomás Verde Logo">
+  <!-- Navigation - Con efecto glassmorphism -->
+  <nav class="glass" style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1200px; background: rgba(255, 255, 255, 0.15); box-shadow: var(--glass-shadow); z-index: 1000; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 50px; animation: fadeInDown 0.8s ease-out;">
+    <div class="nav__container" style="margin: 0 auto; padding: 0.8rem 2rem; display: flex; justify-content: space-between; align-items: center;">
+      <a href="#inicio" class="nav__logo" style="display: flex; align-items: center; text-decoration: none;">
+        <img src="img/logo.svg" alt="Tomás Verde Logo" style="height: 40px; margin-right: 0.5rem; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));">
       </a>
       
-      <button class="nav__toggle" aria-label="Menú">
-        <span></span>
-        <span></span>
-        <span></span>
+      <style>
+        @keyframes fadeInDown {
+          from {
+            opacity: 0;
+            transform: translate(-50%, -20px);
+          }
+          to {
+            opacity: 1;
+            transform: translate(-50%, 0);
+          }
+        }
+      </style>
+      
+      <button class="nav__toggle glass" aria-label="Menú" style="display: none; background: rgba(255, 255, 255, 0.2); border: none; cursor: pointer; padding: 0.8rem; border-radius: 50%;">
+        <span style="display: block; width: 25px; height: 2px; background: white; margin: 5px 0; border-radius: 3px;"></span>
+        <span style="display: block; width: 25px; height: 2px; background: white; margin: 5px 0; border-radius: 3px;"></span>
+        <span style="display: block; width: 25px; height: 2px; background: white; margin: 5px 0; border-radius: 3px;"></span>
       </button>
       
-      <ul class="nav__menu">
-        <li><a href="#inicio" class="nav__link active">Inicio</a></li>
-        <li><a href="#servicios" class="nav__link">Servicios</a></li>
-        <li><a href="#proceso" class="nav__link">Proceso</a></li>
-        <li><a href="#impacto" class="nav__link">Impacto</a></li>
-        <li><a href="#contacto" class="nav__link">Contacto</a></li>
+      <ul class="nav__menu" style="display: flex; list-style: none; margin: 0; padding: 0; gap: 2rem;">
+        <li><a href="#inicio" class="nav__link" style="font-family: 'Quicksand', sans-serif; font-weight: 600; color: white; text-decoration: none; transition: all 0.3s ease; position: relative; padding: 0.5rem 1rem; border-radius: 30px; text-shadow: 0 1px 2px rgba(0,0,0,0.1);">Inicio</a></li>
+        <li><a href="#servicios" class="nav__link" style="font-family: 'Quicksand', sans-serif; font-weight: 600; color: white; text-decoration: none; transition: all 0.3s ease; position: relative; padding: 0.5rem 1rem; border-radius: 30px; text-shadow: 0 1px 2px rgba(0,0,0,0.1);">Servicios</a></li>
+        <li><a href="#proceso" class="nav__link" style="font-family: 'Quicksand', sans-serif; font-weight: 600; color: white; text-decoration: none; transition: all 0.3s ease; position: relative; padding: 0.5rem 1rem; border-radius: 30px; text-shadow: 0 1px 2px rgba(0,0,0,0.1);">Proceso</a></li>
+        <li><a href="#impacto" class="nav__link" style="font-family: 'Quicksand', sans-serif; font-weight: 600; color: white; text-decoration: none; transition: all 0.3s ease; position: relative; padding: 0.5rem 1rem; border-radius: 30px; text-shadow: 0 1px 2px rgba(0,0,0,0.1);">Impacto</a></li>
+        <li><a href="#contacto" class="nav__link" style="font-family: 'Quicksand', sans-serif; font-weight: 600; color: white; text-decoration: none; transition: all 0.3s ease; position: relative; padding: 0.5rem 1rem; border-radius: 30px; text-shadow: 0 1px 2px rgba(0,0,0,0.1);">Contacto</a></li>
       </ul>
+      
+      <style>
+        .nav__link:hover {
+          background: rgba(255, 255, 255, 0.2);
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+          transform: translateY(-2px);
+        }
+      </style>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section id="inicio" class="hero" style="background-image: url('img/hero.webp'); background-size: cover; background-position: center;">
-    <div class="hero__overlay"></div>
-    <div class="hero__content">
-      <h1 class="hero__title">Transformando residuos en vida</h1>
-      <p class="hero__subtitle">Servicio de reciclaje orgánico y compostaje en Pichilemu</p>
-      <a href="#contacto" class="btn btn--primary hero__cta">Únete al cambio</a>
+  <!-- Hero Section con Glassmorphism -->
+  <section id="inicio" class="hero" style="margin-top: 0; padding-top: 100px; padding-bottom: 0; position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: transparent; border: none; outline: none;">
+    <!-- Ya no necesitamos la imagen de fondo porque tenemos el video -->
+    <!-- El video de fondo ya está en el body -->
+    
+    <!-- Elementos decorativos de fondo -->
+    <div style="position: absolute; top: 20%; left: 10%; width: 300px; height: 300px; background: radial-gradient(circle, var(--color-light-green), transparent 70%); border-radius: 50%; opacity: 0.4; filter: blur(60px); animation: float 15s infinite alternate ease-in-out;"></div>
+    <div style="position: absolute; bottom: 15%; right: 5%; width: 250px; height: 250px; background: radial-gradient(circle, var(--color-medium-earth), transparent 70%); border-radius: 50%; opacity: 0.3; filter: blur(50px); animation: float 18s infinite alternate-reverse ease-in-out;"></div>
+    
+    <div class="hero__content" style="background: transparent; border-radius: 30px; padding: 3.5rem; max-width: 800px; text-align: center; position: relative; z-index: 2; animation: fadeInUp 1s ease-out; border: none; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none;">
+      <h1 class="hero__title" style="font-size: 5rem; font-family: 'Playfair Display', serif; font-weight: 700; color: white; margin-bottom: 1rem; text-shadow: 0 3px 15px rgba(0, 0, 0, 0.5); letter-spacing: 1px; text-transform: uppercase;">Transformando residuos en vida</h1>
+      <p class="hero__subtitle" style="font-size: 1.8rem; font-family: 'Playfair Display', serif; font-weight: 300; font-style: italic; color: white; margin-bottom: 2rem; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);">Servicio de reciclaje orgánico y compostaje en Pichilemu</p>
+      <a href="#contacto" class="btn" style="background: rgba(255, 255, 255, 0.15); color: white; border: 2px solid rgba(255, 255, 255, 0.3); padding: 1rem 2.5rem; border-radius: 50px; font-family: 'Playfair Display', serif; font-weight: 600; font-size: 1.2rem; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; display: inline-block; transition: all 0.5s ease; text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);">Únete al cambio</a>
     </div>
-    <div class="shape-divider">
-      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
-      </svg>
+    
+    <style>
+      .btn:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.25);
+        border-color: rgba(255, 255, 255, 0.5);
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+      }
+    </style>
+    
+    <!-- Partículas orgánicas flotantes (hojas, semillas) -->
+    <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; z-index: 1; opacity: 0.6;">
+      <div class="floating-leaf" style="position: absolute; width: 20px; height: 20px; background: var(--color-light-green); border-radius: 50% 0 50% 50%; transform: rotate(45deg); top: 20%; left: 10%; opacity: 0.4; animation: float 15s infinite ease-in-out;"></div>
+      <div class="floating-leaf" style="position: absolute; width: 15px; height: 15px; background: var(--color-moss); border-radius: 50% 50% 0 50%; transform: rotate(15deg); top: 30%; left: 85%; opacity: 0.3; animation: float 18s infinite ease-in-out 2s;"></div>
+      <div class="floating-leaf" style="position: absolute; width: 25px; height: 25px; background: var(--color-medium-earth); border-radius: 50%; top: 70%; left: 25%; opacity: 0.2; animation: float 20s infinite ease-in-out 1s;"></div>
+      <div class="floating-leaf" style="position: absolute; width: 12px; height: 12px; background: var(--color-leaf-gold); border-radius: 50% 0 50% 0; transform: rotate(30deg); top: 60%; left: 70%; opacity: 0.3; animation: float 17s infinite ease-in-out 3s;"></div>
     </div>
+    
+    <style>
+      @keyframes float {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        25% { transform: translateY(-20px) rotate(5deg); }
+        50% { transform: translateY(-35px) rotate(-5deg); }
+        75% { transform: translateY(-15px) rotate(3deg); }
+      }
+    </style>
+    
+    <!-- Partículas de hojas flotantes (se mostrarán solo si JS está disponible) -->
+    <div id="particles-js" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;"></div>
   </section>
+  
+  <!-- Particles.js para efectos visuales -->
+  <script>
+    // Se cargará después de que la página esté lista
+    document.addEventListener('DOMContentLoaded', function() {
+      // Carga particles.js si está disponible
+      if (typeof particlesJS !== 'undefined') {
+        particlesJS('particles-js', {
+          "particles": {
+            "number": {
+              "value": 20,
+              "density": {
+                "enable": true,
+                "value_area": 1000
+              }
+            },
+            "color": {
+              "value": "#ffffff"
+            },
+            "shape": {
+              "type": "image",
+              "image": {
+                "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzJDNTUzMCIgZD0iTTE3LDhDOCwxMCw1LjksMTYuMTcsMy44MiwyMS4zNEw1LjcxLDIybDEtMi4zQTQuNDksNC40OSwwLDAsMCw4LDIwQzE5LDIwLDIyLDMsMjIsMywyMSw1LDE0LDUuMjUsOSw2LjI1UzIsMTEuNSwyLDEzLjVhNi4yMyw2LjIzLDAsMCwwLDEuNCwzLjNMMy4zLDE3bC43LTEuNUEzLjc5LDMuNzksMCwwLDAsNC41LDE2QzUsMTYsOSw4LDE3LDhaIi8+PC9zdmc+",
+                "width": 100,
+                "height": 100
+              }
+            },
+            "opacity": {
+              "value": 0.5,
+              "random": true,
+              "anim": {
+                "enable": false,
+                "speed": 1,
+                "opacity_min": 0.1,
+                "sync": false
+              }
+            },
+            "size": {
+              "value": 10,
+              "random": true,
+              "anim": {
+                "enable": false,
+                "speed": 40,
+                "size_min": 0.1,
+                "sync": false
+              }
+            },
+            "line_linked": {
+              "enable": false
+            },
+            "move": {
+              "enable": true,
+              "speed": 2,
+              "direction": "bottom",
+              "random": false,
+              "straight": false,
+              "out_mode": "out",
+              "bounce": false,
+              "attract": {
+                "enable": false,
+                "rotateX": 600,
+                "rotateY": 1200
+              }
+            }
+          },
+          "interactivity": {
+            "detect_on": "canvas",
+            "events": {
+              "onhover": {
+                "enable": false
+              },
+              "onclick": {
+                "enable": false
+              },
+              "resize": true
+            }
+          },
+          "retina_detect": true
+        });
+      }
+    });
+  </script>
 
   <!-- Services Section -->
-  <section id="servicios" class="section">
+  <section id="servicios" class="section" style="position: relative; padding: 8rem 0 6rem; background: transparent; margin-top: -2px; border-top: none; outline: none;">
+    
+    <!-- Elementos decorativos naturales -->
+    <div style="position: absolute; top: 10%; right: 5%; width: 150px; height: 150px; background: radial-gradient(circle at 30% 30%, var(--color-light-green), transparent); border-radius: 50%; opacity: 0.15; filter: blur(30px);"></div>
+    <div style="position: absolute; bottom: 15%; left: 8%; width: 180px; height: 180px; background: radial-gradient(circle at 70% 70%, var(--color-light-earth), transparent); border-radius: 50%; opacity: 0.1; filter: blur(40px);"></div>
     <div class="container">
-      <h2 class="section__title">Nuestros Servicios</h2>
-      <div class="card-grid">
-        <div class="card">
-          <div class="card__icon">
-            <img src="img/recoleccion.svg" alt="Recolección">
+      <h2 class="section__title" style="font-size: 4rem; margin-bottom: 3rem; text-align: center; color: #fff; position: relative; font-family: 'Playfair Display', serif; font-weight: 700; text-shadow: 0 3px 10px rgba(0,0,0,0.4); letter-spacing: 1px; text-transform: uppercase;">
+        Nuestros Servicios
+        <span style="display: block; width: 120px; height: 3px; background: #fff; margin: 1rem auto; box-shadow: 0 3px 8px rgba(0,0,0,0.3);"></span>
+      </h2>
+      <div class="card-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; margin: 0 auto; max-width: 1200px; padding: 0 2rem; opacity: 1; transform: none;">
+        <!-- Servicio 1: Recolección -->
+        <div class="card glass animate-on-scroll" style="opacity: 1; transform: none; background: rgba(255, 255, 255, 0.15); border-radius: 30px; box-shadow: var(--glass-shadow); padding: 2.5rem; text-align: center; transition: all 0.5s ease; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: none; overflow: hidden; position: relative; animation-delay: 0.1s;">
+          <!-- Decorative element - glow -->
+          <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: radial-gradient(circle, var(--color-light-green), transparent 70%); opacity: 0.5; filter: blur(30px); border-radius: 50%; z-index: 0;"></div>
+          
+          <!-- Fondo difuminado con colores orgánicos -->
+          <!-- Image instead of icon -->
+          <div style="width: 120px; height: 120px; margin: 0 auto 1.5rem; background: rgba(255, 255, 255, 0.2); border-radius: 50%; display: flex; justify-content: center; align-items: center; padding: 20px; position: relative; z-index: 1; box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); animation: pulse 3s infinite ease-in-out;">
+            <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+              <!-- Bucket -->
+              <path d="M20,25 L60,25 L65,70 L15,70 Z" 
+                    fill="none" 
+                    stroke="#2C5530" 
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"/>
+              
+              <!-- Handle -->
+              <path d="M25,25 C25,15 55,15 55,25" 
+                    fill="none" 
+                    stroke="#2C5530" 
+                    stroke-width="3"
+                    stroke-linecap="round"/>
+              
+              <!-- Organic waste -->
+              <path d="M25,35 C30,32 35,38 40,35 C45,32 50,38 55,35" 
+                    fill="none" 
+                    stroke="#8B4513" 
+                    stroke-width="3"
+                    stroke-linecap="round"/>
+              
+              <!-- Leaves -->
+              <path d="M30,45 C25,50 35,55 30,50" 
+                    fill="none" 
+                    stroke="#2C5530" 
+                    stroke-width="2"
+                    stroke-linecap="round"/>
+              
+              <path d="M50,45 C45,50 55,55 50,50" 
+                    fill="none" 
+                    stroke="#2C5530" 
+                    stroke-width="2"
+                    stroke-linecap="round"/>
+            </svg>
           </div>
-          <h3 class="card__title">Recolección a Domicilio</h3>
-          <p class="card__text">Retiramos tus residuos orgánicos directamente de tu hogar o negocio, facilitando tu contribución al medio ambiente.</p>
+          
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 1rem; color: white; text-shadow: 0 2px 8px rgba(0,0,0,0.4); position: relative; z-index: 1; font-weight: 700;">Recolección a Domicilio</h3>
+          
+          <p style="font-family: 'Quicksand', sans-serif; font-size: 1.1rem; line-height: 1.6; color: rgba(255,255,255,0.9); margin-bottom: 1.5rem; position: relative; z-index: 1; text-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            Retiramos tus residuos orgánicos directamente de tu hogar o negocio, facilitando tu contribución al medio ambiente de manera sencilla y efectiva.
+          </p>
+          
+          <a href="#contacto" class="glass" style="display: inline-block; padding: 0.7rem 1.5rem; background: rgba(255, 255, 255, 0.2); color: white; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1); border: none; position: relative; z-index: 1;">Solicitar servicio</a>
         </div>
         
-        <div class="card">
-          <div class="card__icon">
-            <img src="img/compostaje.svg" alt="Compostaje">
+        <!-- Servicio 2: Compostaje -->
+        <div class="card glass animate-on-scroll" style="opacity: 1; transform: none; background: rgba(255, 255, 255, 0.15); border-radius: 30px; box-shadow: var(--glass-shadow); padding: 2.5rem; text-align: center; transition: all 0.5s ease; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: none; overflow: hidden; position: relative; animation-delay: 0.3s;">
+          <!-- Decorative element - glow -->
+          <div style="position: absolute; top: -50px; left: -50px; width: 150px; height: 150px; background: radial-gradient(circle, var(--color-medium-earth), transparent 70%); opacity: 0.5; filter: blur(30px); border-radius: 50%; z-index: 0;"></div>
+          
+          <!-- Image instead of icon -->
+          <div style="width: 120px; height: 120px; margin: 0 auto 1.5rem; background: rgba(255, 255, 255, 0.2); border-radius: 50%; display: flex; justify-content: center; align-items: center; padding: 20px; position: relative; z-index: 1; box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); animation: pulse 3s infinite ease-in-out 1s;">
+            <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+              <!-- Compost bin -->
+              <rect x="20" y="20" width="40" height="50" 
+                    fill="none" 
+                    stroke="#8B4513" 
+                    stroke-width="3"
+                    rx="5"/>
+              
+              <!-- Soil layers -->
+              <path d="M25,40 L55,40" 
+                    stroke="#8B4513" 
+                    stroke-width="3"
+                    stroke-linecap="round"/>
+              
+              <path d="M25,50 L55,50" 
+                    stroke="#8B4513" 
+                    stroke-width="3"
+                    stroke-linecap="round"/>
+              
+              <path d="M25,60 L55,60" 
+                    stroke="#8B4513" 
+                    stroke-width="3"
+                    stroke-linecap="round"/>
+              
+              <!-- Growing plant -->
+              <path d="M40,20 C40,20 35,15 40,10 C45,15 40,20 40,20" 
+                    fill="#2C5530"/>
+              
+              <path d="M40,10 L40,20" 
+                    stroke="#2C5530" 
+                    stroke-width="2"
+                    stroke-linecap="round"/>
+              
+              <!-- Air holes -->
+              <circle cx="25" cy="30" r="2" fill="#2C5530"/>
+              <circle cx="35" cy="30" r="2" fill="#2C5530"/>
+              <circle cx="45" cy="30" r="2" fill="#2C5530"/>
+              <circle cx="55" cy="30" r="2" fill="#2C5530"/>
+            </svg>
           </div>
-          <h3 class="card__title">Compostaje Profesional</h3>
-          <p class="card__text">Transformamos los residuos en compost de alta calidad mediante un proceso controlado y eficiente.</p>
+          
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 1rem; color: white; text-shadow: 0 2px 8px rgba(0,0,0,0.4); position: relative; z-index: 1; font-weight: 700;">Compostaje Profesional</h3>
+          
+          <p style="font-family: 'Quicksand', sans-serif; font-size: 1.1rem; line-height: 1.6; color: rgba(255,255,255,0.9); margin-bottom: 1.5rem; position: relative; z-index: 1; text-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            Transformamos los residuos en compost de alta calidad mediante un proceso controlado y eficiente, contribuyendo a la regeneración de suelos.
+          </p>
+          
+          <a href="#contacto" class="glass" style="display: inline-block; padding: 0.7rem 1.5rem; background: rgba(255, 255, 255, 0.2); color: white; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1); border: none; position: relative; z-index: 1;">Conocer más</a>
         </div>
         
-        <div class="card">
-          <div class="card__icon">
-            <img src="img/educacion.svg" alt="Educación">
+        <!-- Servicio 3: Educación -->
+        <div class="card glass animate-on-scroll" style="opacity: 1; transform: none; background: rgba(255, 255, 255, 0.15); border-radius: 30px; box-shadow: var(--glass-shadow); padding: 2.5rem; text-align: center; transition: all 0.5s ease; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: none; overflow: hidden; position: relative; animation-delay: 0.5s;">
+          <!-- Decorative element - glow -->
+          <div style="position: absolute; bottom: -50px; right: -50px; width: 150px; height: 150px; background: radial-gradient(circle, var(--color-leaf-gold), transparent 70%); opacity: 0.5; filter: blur(30px); border-radius: 50%; z-index: 0;"></div>
+          
+          <!-- Image instead of icon -->
+          <div style="width: 120px; height: 120px; margin: 0 auto 1.5rem; background: rgba(255, 255, 255, 0.2); border-radius: 50%; display: flex; justify-content: center; align-items: center; padding: 20px; position: relative; z-index: 1; box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); animation: pulse 3s infinite ease-in-out 2s;">
+            <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+              <!-- Book base -->
+              <path d="M20,20 L20,60 L60,60 L60,20 L20,20 Z" 
+                    fill="none" 
+                    stroke="#D4A017" 
+                    stroke-width="3"
+                    stroke-linejoin="round"/>
+              
+              <!-- Book pages -->
+              <path d="M20,20 C30,20 50,20 60,20" 
+                    fill="none" 
+                    stroke="#D4A017" 
+                    stroke-width="3"
+                    stroke-linecap="round"/>
+              
+              <!-- Growing plant from book -->
+              <path d="M40,20 C40,20 35,15 40,10 C45,15 40,20 40,20" 
+                    fill="#2C5530"/>
+              
+              <path d="M40,10 L40,20" 
+                    stroke="#2C5530" 
+                    stroke-width="2"
+                    stroke-linecap="round"/>
+              
+              <!-- Leaf decorations -->
+              <path d="M25,30 C20,35 30,40 25,35" 
+                    fill="none" 
+                    stroke="#2C5530" 
+                    stroke-width="2"
+                    stroke-linecap="round"/>
+              
+              <path d="M55,30 C50,35 60,40 55,35" 
+                    fill="none" 
+                    stroke="#2C5530" 
+                    stroke-width="2"
+                    stroke-linecap="round"/>
+              
+              <!-- Text lines -->
+              <path d="M30,40 L50,40" 
+                    stroke="#8B4513" 
+                    stroke-width="2"
+                    stroke-linecap="round"/>
+              
+              <path d="M30,45 L50,45" 
+                    stroke="#8B4513" 
+                    stroke-width="2"
+                    stroke-linecap="round"/>
+              
+              <path d="M30,50 L50,50" 
+                    stroke="#8B4513" 
+                    stroke-width="2"
+                    stroke-linecap="round"/>
+            </svg>
           </div>
-          <h3 class="card__title">Educación Ambiental</h3>
-          <p class="card__text">Ofrecemos talleres y asesorías para que aprendas sobre compostaje y gestión de residuos.</p>
+          
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 1rem; color: white; text-shadow: 0 2px 8px rgba(0,0,0,0.4); position: relative; z-index: 1; font-weight: 700;">Educación Ambiental</h3>
+          
+          <p style="font-family: 'Quicksand', sans-serif; font-size: 1.1rem; line-height: 1.6; color: rgba(255,255,255,0.9); margin-bottom: 1.5rem; position: relative; z-index: 1; text-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            Ofrecemos talleres y asesorías para que aprendas sobre compostaje, gestión de residuos y prácticas sostenibles para tu hogar o negocio.
+          </p>
+          
+          <a href="#contacto" class="glass" style="display: inline-block; padding: 0.7rem 1.5rem; background: rgba(255, 255, 255, 0.2); color: white; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1); border: none; position: relative; z-index: 1;">Inscribirse</a>
         </div>
       </div>
     </div>
+    
+    <style>
+      /* Animaciones y efectos para las tarjetas */
+      .card {
+        transform: translateY(0);
+        will-change: transform, box-shadow;
+      }
+      
+      .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      }
+      
+      .card:hover .card-bg {
+        opacity: 0.15;
+      }
+      
+      /* Animación suave al hacer scroll */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      .card {
+        animation: fadeInUp 0.8s ease-out forwards;
+      }
+      
+      .card:nth-child(1) {
+        animation-delay: 0.2s;
+      }
+      
+      .card:nth-child(2) {
+        animation-delay: 0.4s;
+      }
+      
+      .card:nth-child(3) {
+        animation-delay: 0.6s;
+      }
+    </style>
+    
+    <!-- Espacio para transición suave -->
   </section>
 
   <!-- Process Section -->
-  <section id="proceso" class="section section--alt">
+  <section id="proceso" class="section" style="position: relative; padding: 8rem 0; background: transparent; margin-top: 0; border-top: none;">
+    
+    <!-- Partículas orgánicas flotantes -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; z-index: 1; opacity: 0.4;">
+      <div class="floating-particle" style="position: absolute; width: 30px; height: 30px; background: var(--color-light-green); border-radius: 50% 0 50% 50%; transform: rotate(45deg); top: 15%; left: 5%; opacity: 0.2; animation: floatSlow 25s infinite ease-in-out;"></div>
+      <div class="floating-particle" style="position: absolute; width: 20px; height: 20px; background: var(--color-moss); border-radius: 50% 50% 0 50%; transform: rotate(15deg); top: 25%; left: 80%; opacity: 0.15; animation: floatSlow 28s infinite ease-in-out 3s;"></div>
+      <div class="floating-particle" style="position: absolute; width: 35px; height: 35px; background: var(--color-medium-earth); border-radius: 50%; top: 65%; left: 15%; opacity: 0.1; animation: floatSlow 30s infinite ease-in-out 5s;"></div>
+      <div class="floating-particle" style="position: absolute; width: 18px; height: 18px; background: var(--color-leaf-gold); border-radius: 50% 0 50% 0; transform: rotate(30deg); top: 75%; left: 85%; opacity: 0.2; animation: floatSlow 27s infinite ease-in-out 7s;"></div>
+    </div>
+    
+    <style>
+      @keyframes floatSlow {
+        0%, 100% { transform: translate(0, 0) rotate(0deg); }
+        25% { transform: translate(20px, -30px) rotate(5deg); }
+        50% { transform: translate(40px, -50px) rotate(-5deg); }
+        75% { transform: translate(20px, -20px) rotate(3deg); }
+      }
+    </style>
+    
     <div class="container">
-      <h2 class="section__title">Nuestro Proceso</h2>
-      <div class="process">
-        <div class="process__step">
-          <div class="organic-frame">
-            <img src="img/paso1.jpg" alt="Recolección de residuos">
+      <h2 class="animate-on-scroll" style="font-size: 4rem; margin-bottom: 3.5rem; text-align: center; color: white; position: relative; font-family: 'Playfair Display', serif; font-weight: 700; text-shadow: 0 3px 15px rgba(0,0,0,0.5); letter-spacing: 1px; text-transform: uppercase; animation-delay: 0.1s;">
+        Nuestro Proceso
+        <span style="display: block; width: 120px; height: 3px; background: #fff; margin: 1rem auto; box-shadow: 0 3px 8px rgba(0,0,0,0.3);"></span>
+      </h2>
+      
+      <div style="text-align: center; margin-bottom: 4rem;">
+        <div style="position: absolute; top: 200px; left: 50%; transform: translateX(-50%); width: 200px; height: 200px; background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent 70%); opacity: 0.5; filter: blur(40px); border-radius: 50%; z-index: 0;"></div>
+      </div>
+      
+      <!-- Timeline style process -->
+      <div style="position: relative; max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+        <!-- Timeline line -->
+        <div style="position: absolute; width: 6px; background: rgba(255,255,255,0.3); top: 0; bottom: 0; left: 50%; margin-left: -3px; border-radius: 3px; box-shadow: 0 0 15px rgba(255,255,255,0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);"></div>
+        
+        <!-- Floating particles on timeline -->
+        <div style="position: absolute; width: 15px; height: 15px; background: rgba(255,255,255,0.4); border-radius: 50%; left: 50%; margin-left: -7.5px; top: 20%; animation: float 8s infinite ease-in-out; z-index: 2; box-shadow: 0 0 10px rgba(255,255,255,0.5);"></div>
+        <div style="position: absolute; width: 10px; height: 10px; background: rgba(255,255,255,0.3); border-radius: 50%; left: 50%; margin-left: -5px; top: 50%; animation: float 12s infinite ease-in-out 2s; z-index: 2; box-shadow: 0 0 10px rgba(255,255,255,0.4);"></div>
+        <div style="position: absolute; width: 12px; height: 12px; background: rgba(255,255,255,0.35); border-radius: 50%; left: 50%; margin-left: -6px; top: 75%; animation: float 10s infinite ease-in-out 4s; z-index: 2; box-shadow: 0 0 10px rgba(255,255,255,0.45);"></div>
+        
+        <!-- Step 1 -->
+        <div style="position: relative; margin-bottom: 5rem; width: 100%;">
+          <div class="timeline-card glass animate-on-scroll" style="padding: 2rem; background: rgba(255, 255, 255, 0.15); border-radius: 30px; box-shadow: var(--glass-shadow); width: 45%; position: relative; float: left; animation-delay: 0.1s; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: none; transition: all 0.5s ease; transform: translateY(0);">
+            <div style="position: absolute; top: calc(50% - 15px); right: -15px; width: 30px; height: 30px; background: rgba(255, 255, 255, 0.3); border-radius: 50%; z-index: 1; box-shadow: var(--glass-shadow); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: none; transition: all 0.5s ease;"></div>
+            <div style="position: absolute; top: -30px; right: -30px; width: 100px; height: 100px; background: radial-gradient(circle, var(--color-light-green), transparent 70%); opacity: 0.3; filter: blur(20px); border-radius: 50%; z-index: 0;"></div>
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 1.5rem; color: white; position: relative; z-index: 1; text-shadow: 0 2px 8px rgba(0,0,0,0.4); font-weight: 700;">1. Recolección</h3>
+            <p style="font-family: 'Quicksand', sans-serif; font-size: 1.1rem; line-height: 1.6; color: rgba(255,255,255,0.9); margin-bottom: 1rem; text-shadow: 0 1px 3px rgba(0,0,0,0.1);">Retiramos tus residuos orgánicos en contenedores especiales, asegurándonos de que todo se transporte de manera higiénica y efectiva.</p>
+            <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?q=80&w=800" alt="Recolección de residuos" style="width: 100%; height: 200px; object-fit: cover; border-radius: 20px; margin-top: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
           </div>
-          <h3>1. Recolección</h3>
-          <p>Retiramos tus residuos orgánicos en contenedores especiales.</p>
         </div>
         
-        <div class="process__step">
-          <div class="organic-frame">
-            <img src="img/paso2.jpg" alt="Clasificación de residuos">
+        <!-- Step 2 -->
+        <div style="position: relative; margin-bottom: 5rem; width: 100%; clear: both;">
+          <div class="timeline-card glass animate-on-scroll" style="padding: 2rem; background: rgba(255, 255, 255, 0.15); border-radius: 30px; box-shadow: var(--glass-shadow); width: 45%; position: relative; float: right; animation-delay: 0.3s; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: none; transition: all 0.5s ease; transform: translateY(0);">
+            <div style="position: absolute; top: calc(50% - 15px); left: -15px; width: 30px; height: 30px; background: rgba(255, 255, 255, 0.3); border-radius: 50%; z-index: 1; box-shadow: var(--glass-shadow); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: none; transition: all 0.5s ease;"></div>
+            <div style="position: absolute; top: -30px; left: -30px; width: 100px; height: 100px; background: radial-gradient(circle, var(--color-medium-earth), transparent 70%); opacity: 0.3; filter: blur(20px); border-radius: 50%; z-index: 0;"></div>
+            <h3 style="font-family: 'Caveat', cursive; font-size: 2.4rem; margin-bottom: 1.5rem; color: white; position: relative; z-index: 1; text-shadow: 0 2px 5px rgba(0,0,0,0.2);">2. Clasificación</h3>
+            <p style="font-family: 'Quicksand', sans-serif; font-size: 1.1rem; line-height: 1.6; color: rgba(255,255,255,0.9); margin-bottom: 1rem; text-shadow: 0 1px 3px rgba(0,0,0,0.1);">Separamos y preparamos los materiales orgánicos para un compostaje óptimo, diferenciando por tipo y características.</p>
+            <img src="https://images.unsplash.com/photo-1542601600647-3a722a90a76c?q=80&w=800" alt="Clasificación de residuos" style="width: 100%; height: 200px; object-fit: cover; border-radius: 20px; margin-top: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
           </div>
-          <h3>2. Clasificación</h3>
-          <p>Separamos y preparamos los materiales para un compostaje óptimo.</p>
         </div>
         
-        <div class="process__step">
-          <div class="organic-frame">
-            <img src="img/paso3.jpg" alt="Proceso de compostaje">
+        <!-- Step 3 -->
+        <div style="position: relative; margin-bottom: 5rem; width: 100%; clear: both;">
+          <div class="timeline-card glass animate-on-scroll" style="padding: 2rem; background: rgba(255, 255, 255, 0.15); border-radius: 30px; box-shadow: var(--glass-shadow); width: 45%; position: relative; float: left; animation-delay: 0.5s; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: none; transition: all 0.5s ease; transform: translateY(0);">
+            <div style="position: absolute; top: calc(50% - 15px); right: -15px; width: 30px; height: 30px; background: rgba(255, 255, 255, 0.3); border-radius: 50%; z-index: 1; box-shadow: var(--glass-shadow); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: none; transition: all 0.5s ease;"></div>
+            <div style="position: absolute; bottom: -30px; right: -30px; width: 100px; height: 100px; background: radial-gradient(circle, var(--color-leaf-gold), transparent 70%); opacity: 0.3; filter: blur(20px); border-radius: 50%; z-index: 0;"></div>
+            <h3 style="font-family: 'Caveat', cursive; font-size: 2.4rem; margin-bottom: 1.5rem; color: white; position: relative; z-index: 1; text-shadow: 0 2px 5px rgba(0,0,0,0.2);">3. Compostaje</h3>
+            <p style="font-family: 'Quicksand', sans-serif; font-size: 1.1rem; line-height: 1.6; color: rgba(255,255,255,0.9); margin-bottom: 1rem; text-shadow: 0 1px 3px rgba(0,0,0,0.1);">Transformamos los residuos en compost mediante un proceso natural, controlando todos los factores para obtener la mejor calidad.</p>
+            <img src="https://images.unsplash.com/photo-1582585113026-69913b9339b5?q=80&w=800" alt="Proceso de compostaje" style="width: 100%; height: 200px; object-fit: cover; border-radius: 20px; margin-top: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
           </div>
-          <h3>3. Compostaje</h3>
-          <p>Transformamos los residuos en compost mediante un proceso natural.</p>
         </div>
         
-        <div class="process__step">
-          <div class="organic-frame">
-            <img src="img/paso4.jpg" alt="Compost final">
+        <!-- Step 4 -->
+        <div style="position: relative; margin-bottom: 0; width: 100%; clear: both;">
+          <div class="timeline-card glass animate-on-scroll" style="padding: 2rem; background: rgba(255, 255, 255, 0.15); border-radius: 30px; box-shadow: var(--glass-shadow); width: 45%; position: relative; float: right; animation-delay: 0.7s; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: none; transition: all 0.5s ease; transform: translateY(0);">
+            <div style="position: absolute; top: calc(50% - 15px); left: -15px; width: 30px; height: 30px; background: rgba(255, 255, 255, 0.3); border-radius: 50%; z-index: 1; box-shadow: var(--glass-shadow); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: none; transition: all 0.5s ease;"></div>
+            <div style="position: absolute; bottom: -30px; left: -30px; width: 100px; height: 100px; background: radial-gradient(circle, var(--color-light-green), transparent 70%); opacity: 0.3; filter: blur(20px); border-radius: 50%; z-index: 0;"></div>
+            <h3 style="font-family: 'Caveat', cursive; font-size: 2.4rem; margin-bottom: 1.5rem; color: white; position: relative; z-index: 1; text-shadow: 0 2px 5px rgba(0,0,0,0.2);">4. Resultado</h3>
+            <p style="font-family: 'Quicksand', sans-serif; font-size: 1.1rem; line-height: 1.6; color: rgba(255,255,255,0.9); margin-bottom: 1rem; text-shadow: 0 1px 3px rgba(0,0,0,0.1);">Obtenemos compost de calidad para enriquecer la tierra, cerrando el ciclo de la economía circular y devolviendo nutrientes al suelo.</p>
+            <img src="https://images.unsplash.com/photo-1587162146766-e06b1189b907?q=80&w=800" alt="Compost final" style="width: 100%; height: 200px; object-fit: cover; border-radius: 20px; margin-top: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
           </div>
-          <h3>4. Resultado</h3>
-          <p>Obtenemos compost de calidad para enriquecer la tierra.</p>
         </div>
+        
+        <!-- Final dot -->
+        <div style="position: absolute; bottom: -50px; left: 50%; margin-left: -15px; width: 30px; height: 30px; background: rgba(255, 255, 255, 0.3); border-radius: 50%; z-index: 3; box-shadow: var(--glass-shadow); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: none; animation: pulse 3s infinite ease-in-out;"></div>
+        
+        <!-- Decorative glow -->
+        <div style="position: absolute; bottom: -60px; left: 50%; margin-left: -25px; width: 50px; height: 50px; background: radial-gradient(circle, var(--color-sand), transparent 70%); opacity: 0.5; filter: blur(15px); border-radius: 50%; z-index: 2; animation: pulse 3s infinite ease-in-out 1.5s;"></div>
       </div>
     </div>
-    <div class="shape-divider shape-divider--bottom">
-      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
-      </svg>
-    </div>
+    
+    <style>
+      /* Animaciones y efectos para las tarjetas de timeline */
+      .timeline-card {
+        will-change: transform, box-shadow;
+        position: relative;
+        z-index: 1;
+      }
+      
+      .timeline-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      }
+      
+      .timeline-card:hover .card-bg {
+        opacity: 0.15;
+      }
+      
+      /* Animación suave al hacer scroll */
+      @keyframes fadeInSide {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      
+      @keyframes fadeInSideRight {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      
+      /* Aplicar animaciones a los elementos */
+      .timeline-card {
+        animation-duration: 0.8s;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease-out;
+        opacity: 0;
+      }
+      
+      /* Elementos a la izquierda */
+      .timeline-card:nth-child(odd) {
+        animation-name: fadeInSide;
+      }
+      
+      /* Elementos a la derecha */
+      .timeline-card:nth-child(even) {
+        animation-name: fadeInSideRight;
+      }
+    </style>
+    
+    <!-- Espacio para transición suave -->
   </section>
 
   <!-- Impact Section -->
-  <section id="impacto" class="section">
-    <div class="container">
-      <h2 class="section__title">Nuestro Impacto</h2>
-      <div class="impact-grid">
-        <div class="impact-number">
-          <div class="impact-number__value">5000+</div>
-          <div class="impact-number__label">Kg de residuos reciclados</div>
+  <section id="impacto" class="section" style="position: relative; padding: 8rem 0; background: transparent; overflow: hidden; margin-top: 0; border-top: none;">
+    
+    <!-- Elementos decorativos con efecto glassmorphism -->
+    <div style="position: absolute; top: 10%; right: 5%; width: 300px; height: 300px; background: radial-gradient(circle, var(--color-light-green), transparent 70%); opacity: 0.4; filter: blur(60px); border-radius: 50%; animation: float 15s infinite alternate ease-in-out;"></div>
+    <div style="position: absolute; bottom: 15%; left: 8%; width: 250px; height: 250px; background: radial-gradient(circle, var(--color-medium-earth), transparent 70%); opacity: 0.3; filter: blur(50px); border-radius: 50%; animation: float 18s infinite alternate-reverse ease-in-out;"></div>
+    
+    <div class="container" style="position: relative; z-index: 3;">
+      <h2 class="animate-on-scroll" style="font-size: 4rem; margin-bottom: 3.5rem; text-align: center; color: white; position: relative; font-family: 'Playfair Display', serif; font-weight: 700; text-shadow: 0 3px 15px rgba(0,0,0,0.5); letter-spacing: 1px; text-transform: uppercase; animation-delay: 0.1s;">
+        Nuestro Impacto
+        <span style="display: block; width: 120px; height: 3px; background: #fff; margin: 1rem auto; box-shadow: 0 3px 8px rgba(0,0,0,0.3);"></span>
+      </h2>
+      
+      <!-- Stats with glassmorphism -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin: 0 auto 4rem; max-width: 1200px;">
+        
+        <!-- Stat 1 -->
+        <div class="stat-card glass animate-on-scroll" style="background: rgba(255, 255, 255, 0.15); border-radius: 30px; padding: 2.5rem; text-align: center; color: white; box-shadow: var(--glass-shadow); position: relative; overflow: hidden; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: none; transition: all 0.5s ease; transform: translateY(0); animation-delay: 0.2s;">
+          <!-- Decorative glow -->
+          <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: radial-gradient(circle, var(--color-light-green), transparent 70%); opacity: 0.5; filter: blur(30px); border-radius: 50%; z-index: 0;"></div>
+          
+          <!-- Floating particles -->
+          <div style="position: absolute; top: 20px; left: 20px; width: 10px; height: 10px; background: rgba(255, 255, 255, 0.5); border-radius: 50%; animation: float 8s infinite ease-in-out; opacity: 0.6;"></div>
+          <div style="position: absolute; bottom: 30px; right: 40px; width: 15px; height: 15px; background: rgba(255, 255, 255, 0.5); border-radius: 50%; animation: float 10s infinite ease-in-out 2s; opacity: 0.4;"></div>
+          
+          <div class="stat-number" style="font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; font-family: 'Playfair Display', serif; position: relative; z-index: 1; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); transition: all 0.5s ease;">7,500+</div>
+          <div style="font-size: 1.2rem; font-weight: 500; font-family: 'Quicksand', sans-serif; max-width: 200px; margin: 0 auto; position: relative; z-index: 1; text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);">Kg de residuos orgánicos reciclados</div>
         </div>
         
-        <div class="impact-number">
-          <div class="impact-number__value">100+</div>
-          <div class="impact-number__label">Familias participantes</div>
+        <!-- Stat 2 -->
+        <div class="stat-card glass animate-on-scroll" style="background: rgba(255, 255, 255, 0.15); border-radius: 30px; padding: 2.5rem; text-align: center; color: white; box-shadow: var(--glass-shadow); position: relative; overflow: hidden; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: none; transition: all 0.5s ease; transform: translateY(0); animation-delay: 0.4s;">
+          <!-- Decorative glow -->
+          <div style="position: absolute; top: 50%; left: -50px; width: 150px; height: 150px; background: radial-gradient(circle, var(--color-medium-earth), transparent 70%); opacity: 0.5; filter: blur(30px); border-radius: 50%; z-index: 0;"></div>
+          
+          <!-- Floating particles -->
+          <div style="position: absolute; top: 40px; right: 30px; width: 12px; height: 12px; background: rgba(255, 255, 255, 0.5); border-radius: 50%; animation: float 9s infinite ease-in-out 1s; opacity: 0.5;"></div>
+          <div style="position: absolute; bottom: 20px; left: 25px; width: 8px; height: 8px; background: rgba(255, 255, 255, 0.5); border-radius: 50%; animation: float 11s infinite ease-in-out 3s; opacity: 0.7;"></div>
+          
+          <div class="stat-number" style="font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; font-family: 'Playfair Display', serif; position: relative; z-index: 1; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); transition: all 0.5s ease;">150+</div>
+          <div style="font-size: 1.2rem; font-weight: 500; font-family: 'Quicksand', sans-serif; max-width: 200px; margin: 0 auto; position: relative; z-index: 1; text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);">Familias y negocios participantes</div>
         </div>
         
-        <div class="impact-number">
-          <div class="impact-number__value">1000+</div>
-          <div class="impact-number__label">Kg de compost producido</div>
+        <!-- Stat 3 -->
+        <div class="stat-card glass animate-on-scroll" style="background: rgba(255, 255, 255, 0.15); border-radius: 30px; padding: 2.5rem; text-align: center; color: white; box-shadow: var(--glass-shadow); position: relative; overflow: hidden; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: none; transition: all 0.5s ease; transform: translateY(0); animation-delay: 0.6s;">
+          <!-- Decorative glow -->
+          <div style="position: absolute; bottom: -50px; right: -50px; width: 150px; height: 150px; background: radial-gradient(circle, var(--color-leaf-gold), transparent 70%); opacity: 0.5; filter: blur(30px); border-radius: 50%; z-index: 0;"></div>
+          
+          <!-- Floating particles -->
+          <div style="position: absolute; top: 30px; left: 40px; width: 14px; height: 14px; background: rgba(255, 255, 255, 0.5); border-radius: 50%; animation: float 12s infinite ease-in-out; opacity: 0.6;"></div>
+          <div style="position: absolute; bottom: 40px; right: 20px; width: 10px; height: 10px; background: rgba(255, 255, 255, 0.5); border-radius: 50%; animation: float 9s infinite ease-in-out 4s; opacity: 0.5;"></div>
+          
+          <div class="stat-number" style="font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; font-family: 'Playfair Display', serif; position: relative; z-index: 1; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); transition: all 0.5s ease;">2,000+</div>
+          <div style="font-size: 1.2rem; font-weight: 500; font-family: 'Quicksand', sans-serif; max-width: 200px; margin: 0 auto; position: relative; z-index: 1; text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);">Kg de compost de alta calidad producido</div>
         </div>
       </div>
       
-      <div class="testimonials">
-        <div class="testimonial">
-          <p class="testimonial__text">"El servicio de Tomás Verde ha cambiado completamente la manera en que manejamos nuestros residuos. ¡Es increíble ver cómo nuestros desechos se transforman en algo útil!"</p>
-          <div class="testimonial__author">María González - Vecina de Pichilemu</div>
+      <style>
+        /* Animaciones y efectos para las tarjetas de estadísticas */
+        .stat-card {
+          will-change: transform, box-shadow;
+          position: relative;
+          z-index: 1;
+          opacity: 0;
+          animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .stat-card:nth-child(1) {
+          animation-delay: 0.2s;
+        }
+        
+        .stat-card:nth-child(2) {
+          animation-delay: 0.4s;
+        }
+        
+        .stat-card:nth-child(3) {
+          animation-delay: 0.6s;
+        }
+        
+        .stat-card:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .stat-card:hover .stat-number {
+          transform: scale(1.1);
+        }
+        
+        .stat-number {
+          transition: all 0.5s ease;
+          display: inline-block;
+        }
+        
+        /* Efecto de contador para los números */
+        @keyframes countUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .stat-number {
+          animation: countUp 1s ease-out forwards;
+          opacity: 0;
+        }
+      </style>
+      
+      <!-- Testimonials with glassmorphism -->
+      <div style="max-width: 800px; margin: 0 auto; position: relative; padding: 3rem 2rem;">
+        <!-- Decorative quotation mark -->
+        <div style="position: absolute; top: 0; left: 0; font-size: 8rem; line-height: 1; color: white; opacity: 0.15; font-family: Georgia, serif; z-index: 1; text-shadow: 0 3px 10px rgba(0,0,0,0.2);">&ldquo;</div>
+        
+        <div class="testimonial-card glass animate-on-scroll" style="background: rgba(255, 255, 255, 0.15); border-radius: 30px; padding: 3rem; box-shadow: var(--glass-shadow); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: none; text-align: center; position: relative; transition: all 0.5s ease; transform: translateY(0); animation-delay: 0.3s;">
+          <!-- Decorative glow -->
+          <div style="position: absolute; top: -30px; right: -30px; width: 150px; height: 150px; background: radial-gradient(circle, var(--color-light-green), transparent 70%); opacity: 0.3; filter: blur(30px); border-radius: 50%; z-index: 0;"></div>
+          <div style="position: absolute; bottom: -30px; left: -30px; width: 150px; height: 150px; background: radial-gradient(circle, var(--color-medium-earth), transparent 70%); opacity: 0.3; filter: blur(30px); border-radius: 50%; z-index: 0;"></div>
+          
+          <!-- Floating particles -->
+          <div style="position: absolute; top: 20%; left: 10%; width: 10px; height: 10px; background: rgba(255, 255, 255, 0.5); border-radius: 50%; animation: float 8s infinite ease-in-out; opacity: 0.6; z-index: 0;"></div>
+          <div style="position: absolute; bottom: 30%; right: 15%; width: 15px; height: 15px; background: rgba(255, 255, 255, 0.5); border-radius: 50%; animation: float 10s infinite ease-in-out 2s; opacity: 0.4; z-index: 0;"></div>
+          
+          <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="María González" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: -80px auto 1.5rem; border: none; box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2); transition: all 0.5s ease; z-index: 2; position: relative;">
+          
+          <p style="font-size: 1.2rem; line-height: 1.8; color: white; font-style: italic; margin-bottom: 1.5rem; font-family: 'Quicksand', sans-serif; position: relative; z-index: 1; text-shadow: 0 1px 3px rgba(0,0,0,0.2);">"El servicio de Tomás Verde ha cambiado completamente la manera en que manejamos nuestros residuos. Es increíble ver cómo nuestros desechos se transforman en algo útil, y el equipo siempre es puntual y amable. ¡Recomendado al 100%!"</p>
+          
+          <div style="font-weight: 600; color: white; font-family: 'Playfair Display', serif; font-size: 1.3rem; position: relative; z-index: 1; text-shadow: 0 2px 5px rgba(0,0,0,0.2);">María González</div>
+          <div style="font-size: 0.9rem; color: rgba(255,255,255,0.8); margin-top: 0.3rem; position: relative; z-index: 1; text-shadow: 0 1px 3px rgba(0,0,0,0.1);">Vecina de Pichilemu</div>
+          
+          <!-- Rating stars -->
+          <div style="margin-top: 1rem; color: rgba(255, 215, 0, 0.9); position: relative; z-index: 1; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); font-size: 1.2rem;">
+            ★★★★★
+          </div>
         </div>
       </div>
+      
+      <style>
+        /* Animaciones para el testimonial */
+        .testimonial-card {
+          opacity: 0;
+          animation: fadeInUp 1s ease-out 0.8s forwards;
+          will-change: transform, box-shadow;
+        }
+        
+        .testimonial-card:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-card:hover img {
+          transform: scale(1.05);
+          box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+      </style>
     </div>
+    
+    <!-- Espacio para transición suave -->
   </section>
 
   <!-- Contact Section -->
-  <section id="contacto" class="section section--alt">
-    <div class="container">
-      <h2 class="section__title">Únete al Cambio</h2>
-      <div class="contact-grid">
-        <div class="contact-info">
-          <h3>¿Listo para comenzar?</h3>
-          <ul class="organic-list">
-            <li>Servicio personalizado</li>
-            <li>Recolección programada</li>
-            <li>Asesoría continua</li>
-            <li>Reportes de impacto</li>
-          </ul>
+  <section id="contacto" class="section" style="padding: 8rem 0; background: transparent; position: relative; overflow: hidden; margin-top: 0; border-top: none;">
+    
+    <!-- Elementos decorativos con efecto glassmorphism -->
+    <div style="position: absolute; top: 10%; right: 5%; width: 300px; height: 300px; background: radial-gradient(circle, var(--color-light-green), transparent 70%); opacity: 0.4; filter: blur(60px); border-radius: 50%; animation: float 15s infinite alternate ease-in-out;"></div>
+    <div style="position: absolute; bottom: 15%; left: 8%; width: 250px; height: 250px; background: radial-gradient(circle, var(--color-medium-earth), transparent 70%); opacity: 0.3; filter: blur(50px); border-radius: 50%; animation: float 18s infinite alternate-reverse ease-in-out;"></div>
+    
+    <div class="container" style="position: relative; z-index: 3;">
+      <h2 class="animate-on-scroll" style="font-size: 4rem; margin-bottom: 3.5rem; text-align: center; color: white; position: relative; font-family: 'Playfair Display', serif; font-weight: 700; text-shadow: 0 3px 15px rgba(0,0,0,0.5); letter-spacing: 1px; text-transform: uppercase; animation-delay: 0.1s;">
+        Únete al Cambio
+        <span style="display: block; width: 120px; height: 3px; background: #fff; margin: 1rem auto; box-shadow: 0 3px 8px rgba(0,0,0,0.3);"></span>
+      </h2>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; margin: 0 auto; max-width: 1200px; padding: 0 2rem;">
+        
+        <!-- Left column: Contact info -->
+        <div class="glass animate-on-scroll" style="background: rgba(255, 255, 255, 0.15); border-radius: 30px; padding: 2.5rem; box-shadow: var(--glass-shadow); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: none; position: relative; animation-delay: 0.2s;">
+          <!-- Decorative glow -->
+          <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: radial-gradient(circle, var(--color-light-green), transparent 70%); opacity: 0.3; filter: blur(30px); border-radius: 50%; z-index: 0;"></div>
           
-          <div class="contact-methods">
-            <a href="tel:+56912345678" class="btn btn--secondary">
-              <i class="icon-phone"></i> +569 1234 5678
+          <h3 style="font-family: 'Caveat', cursive; font-size: 2.4rem; margin-bottom: 1.5rem; color: white; text-align: center; text-shadow: 0 2px 5px rgba(0,0,0,0.2);">¿Listo para comenzar?</h3>
+          
+          <div style="position: relative; padding-left: 2rem; margin-bottom: 2rem;">
+            <ul style="list-style: none; padding: 0; margin: 0 0 2rem 0;">
+              <li style="font-family: 'Quicksand', sans-serif; font-size: 1.1rem; margin-bottom: 1rem; position: relative; padding-left: 2rem; color: rgba(255,255,255,0.9); text-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <span style="position: absolute; left: 0; top: 0.2rem; color: white; text-shadow: 0 0 10px rgba(255,255,255,0.5);">✓</span>
+                <strong>Servicio personalizado</strong> adaptado a tus necesidades
+              </li>
+              <li style="font-family: 'Quicksand', sans-serif; font-size: 1.1rem; margin-bottom: 1rem; position: relative; padding-left: 2rem; color: rgba(255,255,255,0.9); text-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <span style="position: absolute; left: 0; top: 0.2rem; color: white; text-shadow: 0 0 10px rgba(255,255,255,0.5);">✓</span>
+                <strong>Recolección programada</strong> en horarios convenientes
+              </li>
+              <li style="font-family: 'Quicksand', sans-serif; font-size: 1.1rem; margin-bottom: 1rem; position: relative; padding-left: 2rem; color: rgba(255,255,255,0.9); text-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <span style="position: absolute; left: 0; top: 0.2rem; color: white; text-shadow: 0 0 10px rgba(255,255,255,0.5);">✓</span>
+                <strong>Asesoría continua</strong> sobre gestión de residuos
+              </li>
+              <li style="font-family: 'Quicksand', sans-serif; font-size: 1.1rem; margin-bottom: 1rem; position: relative; padding-left: 2rem; color: rgba(255,255,255,0.9); text-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <span style="position: absolute; left: 0; top: 0.2rem; color: white; text-shadow: 0 0 10px rgba(255,255,255,0.5);">✓</span>
+                <strong>Reportes de impacto</strong> para medir tu contribución
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Contact methods -->
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <a href="tel:+56912345678" class="glass" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 0.2); border-radius: 50px; text-decoration: none; color: white; font-weight: 600; transition: all 0.3s ease; font-family: 'Quicksand', sans-serif; text-shadow: 0 1px 3px rgba(0,0,0,0.1); box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);">
+              <span style="background: rgba(255, 255, 255, 0.2); width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 1rem; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </span>
+              +569 1234 5678
             </a>
-            <a href="mailto:contacto@tomasverde.cl" class="btn btn--secondary">
-              <i class="icon-mail"></i> contacto@tomasverde.cl
+            
+            <a href="mailto:contacto@tomasverde.cl" class="glass" style="display: flex; align-items: center; padding: 1rem; background: rgba(255, 255, 255, 0.2); border-radius: 50px; text-decoration: none; color: white; font-weight: 600; transition: all 0.3s ease; font-family: 'Quicksand', sans-serif; text-shadow: 0 1px 3px rgba(0,0,0,0.1); box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);">
+              <span style="background: rgba(255, 255, 255, 0.2); width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 1rem; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </span>
+              contacto@tomasverde.cl
             </a>
           </div>
         </div>
         
-        <form class="contact-form">
-          <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre" required>
+        <!-- Right column: Contact form -->
+        <form class="glass animate-on-scroll" style="background: rgba(255, 255, 255, 0.15); border-radius: 30px; padding: 2.5rem; box-shadow: var(--glass-shadow); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: none; animation-delay: 0.4s;">
+          <!-- Decorative glow -->
+          <div style="position: absolute; bottom: -50px; right: -50px; width: 150px; height: 150px; background: radial-gradient(circle, var(--color-light-green), transparent 70%); opacity: 0.3; filter: blur(30px); border-radius: 50%; z-index: 0;"></div>
+          
+          <h3 style="font-family: 'Caveat', cursive; font-size: 2.4rem; margin-bottom: 1.5rem; color: white; text-align: center; text-shadow: 0 2px 5px rgba(0,0,0,0.2);">Contáctanos</h3>
+          
+          <div style="margin-bottom: 1.5rem;">
+            <label for="nombre" style="display: block; margin-bottom: 0.5rem; font-family: 'Quicksand', sans-serif; font-weight: 600; color: white; text-shadow: 0 1px 3px rgba(0,0,0,0.1);">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required style="width: 100%; padding: 0.8rem 1rem; border: none; border-radius: 15px; font-family: 'Quicksand', sans-serif; transition: all 0.3s ease; outline: none; background: rgba(255, 255, 255, 0.2); color: white; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);">
           </div>
           
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+          <div style="margin-bottom: 1.5rem;">
+            <label for="email" style="display: block; margin-bottom: 0.5rem; font-family: 'Quicksand', sans-serif; font-weight: 600; color: white; text-shadow: 0 1px 3px rgba(0,0,0,0.1);">Email</label>
+            <input type="email" id="email" name="email" required style="width: 100%; padding: 0.8rem 1rem; border: none; border-radius: 15px; font-family: 'Quicksand', sans-serif; transition: all 0.3s ease; outline: none; background: rgba(255, 255, 255, 0.2); color: white; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);">
           </div>
           
-          <div class="form-group">
-            <label for="mensaje">Mensaje</label>
-            <textarea id="mensaje" name="mensaje" required></textarea>
+          <div style="margin-bottom: 1.5rem;">
+            <label for="mensaje" style="display: block; margin-bottom: 0.5rem; font-family: 'Quicksand', sans-serif; font-weight: 600; color: white; text-shadow: 0 1px 3px rgba(0,0,0,0.1);">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" required rows="5" style="width: 100%; padding: 0.8rem 1rem; border: none; border-radius: 15px; font-family: 'Quicksand', sans-serif; transition: all 0.3s ease; outline: none; resize: vertical; background: rgba(255, 255, 255, 0.2); color: white; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);"></textarea>
           </div>
           
-          <button type="submit" class="btn btn--primary">Enviar mensaje</button>
+          <button type="submit" class="glass" style="display: block; width: 100%; padding: 1rem; background: rgba(255, 255, 255, 0.2); color: white; border: none; border-radius: 50px; font-weight: 600; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; font-family: 'Quicksand', sans-serif; box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1); text-shadow: 0 1px 3px rgba(0,0,0,0.1); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);">
+            Enviar mensaje
+          </button>
         </form>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__grid">
-        <div class="footer__brand">
-          <img src="img/logo-white.svg" alt="Tomás Verde Logo" class="footer__logo">
-          <p>Transformando residuos orgánicos en vida nueva para nuestros suelos.</p>
+  <!-- Footer - Con estilo glassmorphism -->
+  <footer style="background: linear-gradient(rgba(44, 85, 48, 0.15), rgba(44, 85, 48, 0.15), rgba(44, 85, 48, 0.2)); color: white; padding: 5rem 0 2rem; position: relative; overflow: hidden; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); margin-top: 0; border-top: none;">
+    
+    <!-- Elemento de transición superior -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 120px; background: linear-gradient(to top, transparent, rgba(44, 85, 48, 0.15)); z-index: 2;"></div>
+    
+    <!-- Decorative glows -->
+    <div style="position: absolute; top: 10%; right: 5%; width: 300px; height: 300px; background: radial-gradient(circle, var(--color-light-green), transparent 70%); opacity: 0.2; filter: blur(60px); border-radius: 50%; animation: float 15s infinite alternate ease-in-out;"></div>
+    <div style="position: absolute; bottom: 15%; left: 8%; width: 250px; height: 250px; background: radial-gradient(circle, var(--color-medium-earth), transparent 70%); opacity: 0.2; filter: blur(50px); border-radius: 50%; animation: float 18s infinite alternate-reverse ease-in-out;"></div>
+    
+    <!-- Floating particles -->
+    <div style="position: absolute; top: 20%; left: 30%; width: 10px; height: 10px; background: rgba(255, 255, 255, 0.5); border-radius: 50%; animation: float 8s infinite ease-in-out; opacity: 0.3;"></div>
+    <div style="position: absolute; bottom: 30%; right: 25%; width: 15px; height: 15px; background: rgba(255, 255, 255, 0.5); border-radius: 50%; animation: float 10s infinite ease-in-out 2s; opacity: 0.2;"></div>
+    <div style="position: absolute; top: 60%; right: 40%; width: 8px; height: 8px; background: rgba(255, 255, 255, 0.5); border-radius: 50%; animation: float 12s infinite ease-in-out 1s; opacity: 0.3;"></div>
+    
+    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-bottom: 4rem;">
+        <!-- Brand -->
+        <div class="animate-on-scroll" style="animation-delay: 0.2s;">
+          <div class="glass" style="width: 180px; height: 60px; margin-bottom: 1.5rem; background: rgba(255,255,255,0.15); border-radius: 20px; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: var(--glass-shadow); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: none;">
+            <img src="img/logo-white.svg" alt="Tomás Verde Logo" style="max-width: 80%; max-height: 80%;">
+          </div>
+          
+          <p style="font-family: 'Quicksand', sans-serif; margin-bottom: 1.5rem; line-height: 1.6; color: rgba(255,255,255,0.9); max-width: 300px; text-shadow: 0 1px 3px rgba(0,0,0,0.1);">Transformando residuos orgánicos en vida nueva para nuestros suelos, un paso a la vez hacia un futuro más sostenible.</p>
+          
+          <div style="display: flex; gap: 1rem;">
+            <a href="https://instagram.com/tomasverde" target="_blank" rel="noopener noreferrer" class="glass" style="width: 40px; height: 40px; background: rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; color: white; text-decoration: none; box-shadow: var(--glass-shadow); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border: none;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+            
+            <a href="https://facebook.com/tomasverde" target="_blank" rel="noopener noreferrer" class="glass" style="width: 40px; height: 40px; background: rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; color: white; text-decoration: none; box-shadow: var(--glass-shadow); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border: none;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+              </svg>
+            </a>
+            
+            <a href="https://wa.me/56912345678" target="_blank" rel="noopener noreferrer" class="glass" style="width: 40px; height: 40px; background: rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; color: white; text-decoration: none; box-shadow: var(--glass-shadow); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border: none;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+              </svg>
+            </a>
+          </div>
         </div>
         
-        <div class="footer__links">
-          <h4>Enlaces rápidos</h4>
-          <ul>
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#servicios">Servicios</a></li>
-            <li><a href="#proceso">Proceso</a></li>
-            <li><a href="#impacto">Impacto</a></li>
-            <li><a href="#contacto">Contacto</a></li>
+        <!-- Links -->
+        <div class="animate-on-scroll" style="animation-delay: 0.4s;">
+          <h4 class="glass" style="font-family: 'Caveat', cursive; font-size: 1.8rem; margin-bottom: 1.5rem; position: relative; padding: 0.5rem 1rem; border-radius: 15px; display: inline-block; background: rgba(255,255,255,0.15); box-shadow: var(--glass-shadow); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border: none; text-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+            Enlaces rápidos
+            <span style="position: absolute; bottom: 5px; left: 1rem; width: 40px; height: 2px; background: rgba(255,255,255,0.5); box-shadow: 0 0 10px rgba(255,255,255,0.3);"></span>
+          </h4>
+          
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 0.8rem;">
+              <a href="#inicio" class="glass" style="color: rgba(255,255,255,0.9); text-decoration: none; font-family: 'Quicksand', sans-serif; display: flex; align-items: center; transition: all 0.3s ease; padding: 0.5rem 1rem; border-radius: 10px; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border: none; text-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <span style="margin-right: 0.5rem; font-size: 0.8rem; opacity: 0.8;">›</span> Inicio
+              </a>
+            </li>
+            <li style="margin-bottom: 0.8rem;">
+              <a href="#servicios" class="glass" style="color: rgba(255,255,255,0.9); text-decoration: none; font-family: 'Quicksand', sans-serif; display: flex; align-items: center; transition: all 0.3s ease; padding: 0.5rem 1rem; border-radius: 10px; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border: none; text-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <span style="margin-right: 0.5rem; font-size: 0.8rem; opacity: 0.8;">›</span> Servicios
+              </a>
+            </li>
+            <li style="margin-bottom: 0.8rem;">
+              <a href="#proceso" class="glass" style="color: rgba(255,255,255,0.9); text-decoration: none; font-family: 'Quicksand', sans-serif; display: flex; align-items: center; transition: all 0.3s ease; padding: 0.5rem 1rem; border-radius: 10px; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border: none; text-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <span style="margin-right: 0.5rem; font-size: 0.8rem; opacity: 0.8;">›</span> Proceso
+              </a>
+            </li>
+            <li style="margin-bottom: 0.8rem;">
+              <a href="#impacto" class="glass" style="color: rgba(255,255,255,0.9); text-decoration: none; font-family: 'Quicksand', sans-serif; display: flex; align-items: center; transition: all 0.3s ease; padding: 0.5rem 1rem; border-radius: 10px; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border: none; text-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <span style="margin-right: 0.5rem; font-size: 0.8rem; opacity: 0.8;">›</span> Impacto
+              </a>
+            </li>
+            <li style="margin-bottom: 0.8rem;">
+              <a href="#contacto" class="glass" style="color: rgba(255,255,255,0.9); text-decoration: none; font-family: 'Quicksand', sans-serif; display: flex; align-items: center; transition: all 0.3s ease; padding: 0.5rem 1rem; border-radius: 10px; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border: none; text-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <span style="margin-right: 0.5rem; font-size: 0.8rem; opacity: 0.8;">›</span> Contacto
+              </a>
+            </li>
           </ul>
         </div>
         
-        <div class="footer__social">
-          <h4>Síguenos</h4>
-          <div class="social-links">
-            <a href="https://instagram.com/tomasverde" target="_blank" rel="noopener noreferrer">
-              <i class="icon-instagram"></i>
-            </a>
-            <a href="https://facebook.com/tomasverde" target="_blank" rel="noopener noreferrer">
-              <i class="icon-facebook"></i>
-            </a>
-            <a href="https://wa.me/56912345678" target="_blank" rel="noopener noreferrer">
-              <i class="icon-whatsapp"></i>
-            </a>
+        <!-- Contact Info -->
+        <div class="animate-on-scroll" style="animation-delay: 0.6s;">
+          <h4 class="glass" style="font-family: 'Caveat', cursive; font-size: 1.8rem; margin-bottom: 1.5rem; position: relative; padding: 0.5rem 1rem; border-radius: 15px; display: inline-block; background: rgba(255,255,255,0.15); box-shadow: var(--glass-shadow); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border: none; text-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+            Contacto
+            <span style="position: absolute; bottom: 5px; left: 1rem; width: 40px; height: 2px; background: rgba(255,255,255,0.5); box-shadow: 0 0 10px rgba(255,255,255,0.3);"></span>
+          </h4>
+          
+          <div class="glass" style="margin-bottom: 1rem; display: flex; align-items: center; padding: 0.7rem 1rem; border-radius: 15px; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); box-shadow: var(--glass-shadow); border: none;">
+            <span class="glass" style="margin-right: 1rem; background: rgba(255,255,255,0.2); min-width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: var(--glass-shadow); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border: none;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </span>
+            <span style="font-family: 'Quicksand', sans-serif; color: rgba(255,255,255,0.9); text-shadow: 0 1px 3px rgba(0,0,0,0.1);">Av. Principal 123, Pichilemu, Chile</span>
+          </div>
+          
+          <div class="glass" style="margin-bottom: 1rem; display: flex; align-items: center; padding: 0.7rem 1rem; border-radius: 15px; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); box-shadow: var(--glass-shadow); border: none;">
+            <span class="glass" style="margin-right: 1rem; background: rgba(255,255,255,0.2); min-width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: var(--glass-shadow); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border: none;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </span>
+            <span style="font-family: 'Quicksand', sans-serif; color: rgba(255,255,255,0.9); text-shadow: 0 1px 3px rgba(0,0,0,0.1);">+56 9 1234 5678</span>
+          </div>
+          
+          <div class="glass" style="display: flex; align-items: center; padding: 0.7rem 1rem; border-radius: 15px; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); box-shadow: var(--glass-shadow); border: none;">
+            <span class="glass" style="margin-right: 1rem; background: rgba(255,255,255,0.2); min-width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: var(--glass-shadow); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border: none;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </span>
+            <span style="font-family: 'Quicksand', sans-serif; color: rgba(255,255,255,0.9); text-shadow: 0 1px 3px rgba(0,0,0,0.1);">contacto@tomasverde.cl</span>
           </div>
         </div>
       </div>
       
-      <div class="footer__bottom">
-        <p>&copy; 2024 Tomás Verde. Todos los derechos reservados.</p>
+      <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+        <p class="glass animate-on-scroll" style="font-family: 'Quicksand', sans-serif; color: rgba(255,255,255,0.9); font-size: 0.9rem; display: inline-block; padding: 0.5rem 1.5rem; border-radius: 50px; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); box-shadow: var(--glass-shadow); border: none; text-shadow: 0 1px 3px rgba(0,0,0,0.1); animation-delay: 0.8s;">&copy; 2024 Tomás Verde. Todos los derechos reservados.</p>
       </div>
     </div>
   </footer>
 
   <!-- Scripts -->
   <script src="./js/main.js"></script>
+  
+  </div> <!-- Cierre del div.content-wrapper -->
 </body>
 </html>
